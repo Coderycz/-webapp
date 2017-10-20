@@ -28,8 +28,7 @@ export default {
     position: fixed;
   top: 0;
 }
-.header {
-  
+.header { 
   height: 2rem;
   background: #c62f2f;
   display: flex;

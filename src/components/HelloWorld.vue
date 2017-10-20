@@ -3,7 +3,6 @@
    
     <my-header></my-header>
     <my-body></my-body>
-   
     <my-footer></my-footer>
     
   </div>
@@ -63,6 +62,12 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
+<style lang="scss" scoped>
+$sc :25;
+.hello{
+ width: 100%;
+ height: 100%;
+ overflow: auto;
+  background: #f7f7f7;
+}
 </style>

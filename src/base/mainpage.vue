@@ -26,7 +26,7 @@
            </div>
 
            <div class="up-item">     
-               <span class="left item-i"><i class="iconfont ">&#xe680;</i></span>
+               <span class="left item-i"><i :class="{'iconfont':true}">&#xe680;</i></span>
                <div class="con">     
                     <div class="item-content">
                         <span>本地音乐</span>
@@ -48,35 +48,10 @@
            </div>
        </div>
 <!-- 下歌单 -->
-       <div class="title">
-           <div class="down-item" @click="changshow">              
-                    <span class="fl licon icons"><i class="iconfont">&#xe63b;</i></span>
-                    <div class="fl lname">
-                        <span class="">创建的歌单</span>
-                        <span class="">(5)</span>
-                    </div>              
-               <span class="fr ricon icons"><i class="iconfont">&#xe611;</i></span>
-           </div>
-           <my-songlist v-show="showsonglist"></my-songlist>
-           <div class="down-item" @click="changshow">              
-                    <span class="fl licon icons"><i class="iconfont">&#xe63b;</i></span>
-                    <div class="fl lname">
-                        <span class="">创建的歌单</span>
-                        <span class="">(5)</span>
-                    </div>              
-               <span class="fr ricon icons"><i class="iconfont">&#xe611;</i></span>
-           </div>
-           <my-songlist v-show="showsonglist"></my-songlist>
-           <div class="down-item" @click="changshow">              
-                    <span class="fl licon icons"><i class="iconfont">&#xe63b;</i></span>
-                    <div class="fl lname">
-                        <span class="">创建的歌单</span>
-                        <span class="">(5)</span>
-                    </div>              
-               <span class="fr ricon icons"><i class="iconfont">&#xe611;</i></span>
-           </div>
-           <my-songlist v-show="showsonglist"></my-songlist>
-       </div>
+<my-songlist></my-songlist>
+<my-songlist></my-songlist>
+<my-songlist></my-songlist>
+      
     </div>
     </div>
 </template>
@@ -84,21 +59,20 @@
 <script>
 import mySonglist from "./songlist.vue"
 import "common/style/layout.css";
+import {data} from "@/assets/js/data";
 export default {
   prop: ["sdf"],
   data() {
     return {
       flag: false,
-      showsonglist: false,
+      lists: {},
       list: {
-        info: ["&#xe6cc;", ""]
+        info: ['&#xe6cc;', ""]
       }
     }
   },
   methods:{
-      changshow(){
-          this.showsonglist = !this.showsonglist
-      }
+      
   },
   components: {
       mySonglist
@@ -108,9 +82,9 @@ export default {
 
 <style lang="scss"  scoped>
 $sc: 25;
+
 .container{
     width: 100%;
-   // height: 100%;
     overflow-y: auto;
     margin-top: 2rem;
     margin-bottom: 46/$sc+rem;
@@ -149,36 +123,5 @@ $sc: 25;
 .item-num {
   color: #aaa;
 }
-.title{
-    width: 100%;
-    height: 30/$sc+rem;
-    color: #666;
-    background: #e1e1e1;
-    text-align: center;
-    line-height: 30/$sc+rem;
-    .licon{
-        font-size: 14/$sc+rem;
-        width: 35/$sc+rem;
-        height: 30/$sc+rem;      
-    }
-    .lname{
-        font-size: 12/$sc+rem;
-    }
-    
-    .ricon{ 
-        font-size: 14/$sc+rem;      
-        width: 40/$sc+rem;        
-    }
-    .icons i{
-        font-size: 14/$sc+rem!important;
-    }
-}
-.down-item:after{
-    content: '';
-    display: block;
-    clear: both;
-}
-.down-item{
-    *zoom: 1
-}
+
 </style>
