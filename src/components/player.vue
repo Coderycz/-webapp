@@ -3,8 +3,11 @@
      <div class="bg" >
         <img :src="bg"/> 
     </div> 
-    <pragress></pragress>
+    <!-- <pragress></pragress> -->
+    
     <playerfooter></playerfooter>
+   
+    
 </div>
   
 </template>
@@ -13,14 +16,17 @@
 import pragress from "@/base/player/pragress";
 import playerfooter from "@/base/player/playerfooter";
 
+
 export default {
-    data(){
-        return{
-            bg: "http://oiq8j9er1.bkt.clouddn.com/music_qingnianwanbao.jpg"
-        }
-    },
+  data() {
+    return {
+      bg: "http://oiq8j9er1.bkt.clouddn.com/music_qingnianwanbao.jpg"
+    };
+  },
   components: {
-    pragress,playerfooter
+    pragress,
+    playerfooter,
+   
   }
 };
 /*  */
@@ -28,26 +34,25 @@ export default {
 
 <style lang="scss" scoped>
 $sc: 25;
-    .container{
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        .bg{
-            height: 100%;
-            position: fixed; 
-            z-index: -1;         
-        } 
-        
-       img{
-           display: inline-block;
-            width: 375/$sc+rem;
-            height: 375/$sc+rem;
-            position: absolute;
-            top: 50%;         
-           z-index: 1;    
-           transform: translate(0,-50%) scale(3);
-           filter: blur(15px);
-       }
-       
-    }
+.container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  .bg {
+    height: 100%;
+    position: fixed;
+    z-index: -1;
+  }
+
+  img {
+    display: inline-block;
+    width: 375/$sc+rem;
+    height: 375/$sc+rem;
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    transform: translate(0, -50%) scale(3);
+    filter: blur(15px);
+  }
+}
 </style>
