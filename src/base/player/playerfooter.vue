@@ -12,7 +12,11 @@
         <span><i class="iconfont icon-fenxiang"></i></span>
     </div>   
 <!-- 中间的cd盘 -->
-     <playercd></playercd> 
+    <div @click="showlyric">
+        <playercd  v-show="lyric"></playercd> 
+      <showlyric  v-show="!lyric"></showlyric>
+    </div>
+    
 <!-- 进度条 -->
 <div class="y-footer">
    <div class="range">
@@ -35,9 +39,12 @@
     
 <script>
 import playercd from "@/base/player/playercd";
+import showlyric from "@/base/player/lyric";
 export default {
   data() {
     return {
+      islike: false,
+      lyric: true,
       icondata: [
         "icon-xunhuanbofang",
         "icon-shangyiqu101",
@@ -47,8 +54,16 @@ export default {
       ]
     };
   },
+  methods: {
+    showlyric() {
+      this.lyric = !this.lyric;
+      console.log(this.lyric);
+    }
+    
+  },
   components: {
-    playercd
+    playercd,
+    showlyric
   }
 };
 </script>
@@ -56,9 +71,7 @@ export default {
 <style lang="scss" scoped>
 $sc: 25;
 .headfoot {
-  display: flex;
-  flex-direction: column;
-  //justify-content: space-between;
+  //transform: scale(0.5)
 }
 
 .y-header {

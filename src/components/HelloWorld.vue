@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-   
+  <sidebar></sidebar> 
     <my-header></my-header>
     <my-body></my-body>
     <my-footer></my-footer>
@@ -14,6 +14,8 @@ import mySonglist from "@/base/songlist.vue"
 import myHeader from "../base/header"
 import myBody from "../base/mainpage"
 import myFooter from "../base/footer"
+import sidebar from 'components/sidebar'
+
 
 export default {
   
@@ -56,7 +58,8 @@ export default {
     "my-header": myHeader ,
     myFooter,
     myBody,
-    mySonglist
+    mySonglist,
+    sidebar
   }
 }
 </script>

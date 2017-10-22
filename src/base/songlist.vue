@@ -9,7 +9,7 @@
                <span class="fr ricon icons"><i class="iconfont">&#xe611;</i></span>
            </div>
         <ul v-show="showsonglist" v-for="(v,k) in lists">
-            <li :class="{'y-footer':true}">
+            <router-link tag="li" to="/player" :class="{'y-footer':true}">              
                 <div class="leftinfo">
                     <img src="" alt="">                 
                 </div>
@@ -19,8 +19,9 @@
                         <p class="gou"><i class="iconfont">&#xe615;</i>221首，已下载180首</p>
                     </div>                                  
                     <span><i class="iconfont">&#xe613;</i></span>
-                </div>           
-            </li>
+                </div>
+                         
+            </router-link>
             
         </ul>
     </div>
@@ -28,7 +29,6 @@
 
 <script>
 import "common/style/layout.css";
-
 export default {
   data() {
     return {

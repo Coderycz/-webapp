@@ -1,22 +1,43 @@
 <template>
   <div id="app">
-    <router-view/>
+    
+    <transition name="flod" mode="out-in">
+      <router-view/>
+    </transition>
+    
   </div>
 </template>
 
 <script>
 import "common/style/reset.css";
 import "common/style/layout.css";
-const body = document.documentElement
+
 document.documentElement.style.fontSize = innerWidth / 15 + "px";
 document.getElementById("app").style.height = innerHeight + "px";
-console.log(document.getElementById("app"))
+
+
+
 export default {
-  name: 'app'
+  name: 'app',
+  components:{
+    
+  }
 }
 </script>
 
 <style>
+
+.flod-enter{
+    opacity: 0;
+    transform: scale(0.5);   
+}
+.flod-enter-active{
+    opacity: 1;
+    transform: scale(1);  
+    transition: all 0.5s ease  
+}
+
+
 #app{
   width: 100%;
  height: 100%;

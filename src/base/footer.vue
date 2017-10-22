@@ -1,9 +1,7 @@
 <template>   
     <div class="my-footer">
         <div class="container">
-
-        
-        <div class="y-footer">
+          <router-link tag="div" to="/player" class="y-footer">
             <div class="leftinfo">
                 <img src="" alt="">
                 <div class="songname">
@@ -12,10 +10,10 @@
                 </div>
             </div>
             <div class="rightmenu">               
-                <span><i class="iconfont">&#xe600;</i></span>
-                <span><i class="iconfont">&#xe604;</i></span>
+                <span @click.stop="play"><i class="iconfont">&#xe600;</i></span>                
+                <span @click.stop="menu"><i class="iconfont">&#xe604;</i></span>            
             </div>           
-        </div>
+        </router-link>
     </div>
     </div>
 </template>
@@ -23,22 +21,23 @@
 <script>
 import "common/style/layout.css";
 export default {
-  componensts: {}
+  components: {}
 };
 </script>
 
 <style lang="scss"  scoped>
 $sc: 25;
 
-.container{
-    background: #fff;
-    height: 46/$sc+rem;
+.container {
+  background: #fff;
+  height: 46/$sc+rem;
   width: 100%;
-    position: fixed;
+  position: fixed;
   bottom: 0;
 }
 .y-footer {
   padding: 5/$sc+rem;
+  height: 46/$sc+rem;
   .leftinfo {
     float: left;
     display: flex;

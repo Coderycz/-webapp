@@ -1,19 +1,18 @@
 <template>
+
 <div class="container" >
      <div class="bg" >
         <img :src="bg"/> 
     </div> 
-    <!-- <pragress></pragress> -->
-    
-    <playerfooter></playerfooter>
-   
-    
+    <!-- <pragress></pragress> --> 
+    <playerfooter></playerfooter>  
 </div>
+
   
 </template>
 
 <script>
-import pragress from "@/base/player/pragress";
+
 import playerfooter from "@/base/player/playerfooter";
 
 
@@ -24,7 +23,7 @@ export default {
     };
   },
   components: {
-    pragress,
+   
     playerfooter,
    
   }
@@ -34,7 +33,10 @@ export default {
 
 <style lang="scss" scoped>
 $sc: 25;
+
+
 .container {
+   
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -43,7 +45,6 @@ $sc: 25;
     position: fixed;
     z-index: -1;
   }
-
   img {
     display: inline-block;
     width: 375/$sc+rem;

@@ -1,5 +1,5 @@
 <template>
-    <div class="cd">
+    <div class="cd" >
         <div class="line">
             <div class="pointer ">
             </div>
@@ -9,19 +9,32 @@
         </div>
         <div class="like-container">
             <div class="like">
-                <i class="iconfont icon-like"></i>
+                <i class="iconfont" @click.stop="changelike" :class="{'icon-like':islike,'icon-xihuan':!islike,'red':!islike}"></i>
             <i class="iconfont icon-xiazai"></i>
             <span class="pinlun"><i class="iconfont icon-xinxi"></i><span class="num">999+</span></span>
             
             <i class="iconfont icon-gengduo"></i>
-            </div>
-            
+            </div>     
         </div>
     </div>
 </template>
 
 <script>
-export default {};
+export default {
+    data(){
+        return {
+            islike: true
+        }
+    },
+    methods:{
+changelike(){
+      
+        this.islike = !this.islike
+    },
+    
+    }
+    
+};
 </script>
 
 <style scoped lang="scss">
@@ -64,7 +77,7 @@ $sc: 25;
   }
 }
 
-/* 用vh实现百分比宽高 */
+/* cd盘用vh实现百分比宽高 */
 .cdpic {
   width: 44vh;
   height: 44vh;
@@ -93,11 +106,17 @@ $sc: 25;
   bottom: 0;
   padding: 0 15%;
   i {
+    
     font-size: 20/$sc+rem;
+    &.red{
+        color: red
+    }
   }
 }
 .like {
   // background: #fff
+ height: 50px;
+ line-height: 50px;
   color: #aaa;
   display: flex;
   width: 100%;
