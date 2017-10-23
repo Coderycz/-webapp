@@ -12,7 +12,6 @@
                     <div class="sign"><span><i class="icon iconfont icon-iconfontcoin"></i></span>签到</div>
                 </div>
             </div>
-
         <div class="uls">
         <ul >
             <li v-for="(v,k) in uls1.info">
@@ -32,7 +31,7 @@
         </ul>
         <span class="gray"></span>
 
-        <ul >
+        <ul>
             <li v-for="(v,k) in uls2.info">
                 <span class="icon"><i class="iconfont "  :class="uls2.icon[k]"></i></span>
                 <p >{{uls2.info[k]}}</p>
