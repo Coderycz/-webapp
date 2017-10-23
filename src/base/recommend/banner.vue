@@ -62,10 +62,12 @@ export default {
 <style lang="scss" scoped>
 .container{
     height: 160px;
+    position: fixed;
+    top: 4rem;
+  
 }
 .swiper-slide {
     width: 100%;
- 
   img {
     width: 100%;
     height: 160px;

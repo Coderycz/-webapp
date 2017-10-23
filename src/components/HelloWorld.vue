@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-  <sidebar></sidebar> 
+    
     <my-header></my-header>
     <my-body></my-body>
     <my-footer></my-footer>
@@ -14,7 +14,7 @@ import mySonglist from "@/base/songlist.vue"
 import myHeader from "../base/header"
 import myBody from "../base/mainpage"
 import myFooter from "../base/footer"
-import sidebar from 'components/sidebar'
+
 
 
 export default {
@@ -34,7 +34,7 @@ export default {
     _get(){
       getRecommend().then((res) => {
         if(res.code === 0){
-          console.log(res.data.slider)
+          console.log(res.data)
         }
       })
     },
@@ -59,7 +59,7 @@ export default {
     myFooter,
     myBody,
     mySonglist,
-    sidebar
+
   }
 }
 </script>

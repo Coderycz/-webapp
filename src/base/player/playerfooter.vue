@@ -4,7 +4,7 @@
     <!-- 头部 -->
    
     <div class="y-header">
-        <span><i class="iconfont icon-zuo"></i></span>
+        <span @click="goback"><i class="iconfont icon-zuo"></i></span>
         <div>
             <p class="title">化身孤岛的鲸</p>
             <p class="singer">不才</p>
@@ -58,9 +58,13 @@ export default {
     showlyric() {
       this.lyric = !this.lyric;
       console.log(this.lyric);
+    },
+    goback(){
+      return this.$router.go(-1)
     }
     
   },
+
   components: {
     playercd,
     showlyric

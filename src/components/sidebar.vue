@@ -1,6 +1,7 @@
 <template>
   <div class="sidebar">
-    <div class="cover" @click="close"></div>
+    
+    <div class="cover" @click="close(isclose)" :class="{'coverhid':!isclose}"></div>
     <div class="bar " :class="{'close':isclose}">
             <div class="bg">            
                <img src="http://oiq8j9er1.bkt.clouddn.com/music_%E7%8A%AC%E5%A4%9C%E5%8F%89.jpg"/>
@@ -12,7 +13,9 @@
                     <div class="sign"><span><i class="icon iconfont icon-iconfontcoin"></i></span>签到</div>
                 </div>
             </div>
+
         <div class="uls">
+          {{isclose}}
         <ul >
             <li v-for="(v,k) in uls1.info">
                 <span class="icon"><i class="iconfont "  :class="uls1.icon[k]"></i></span>
@@ -31,7 +34,7 @@
         </ul>
         <span class="gray"></span>
 
-        <ul>
+        <ul >
             <li v-for="(v,k) in uls2.info">
                 <span class="icon"><i class="iconfont "  :class="uls2.icon[k]"></i></span>
                 <p >{{uls2.info[k]}}</p>
@@ -65,10 +68,9 @@
 
 <script>
 export default {
-  
+  props:['isclose'],
   data() {
-    return {
-      isclose: false,
+    return {    
       uls1: {
         icon: ["icon-xiaoxi", "icon-huiyuan", "icon-shangcheng"],
         info: ["我的消息", "会员中心", "商城"]
@@ -84,8 +86,10 @@ export default {
       console.log("sdf");
     },
     
-    close() {
-      this.isclose = !this.isclose;
+    close(b) {
+      this.isclose = !b;
+      console.log(this.isclose+"----")
+      this.$emit("changeflag",!b)
     }
  
   }
@@ -97,12 +101,19 @@ $sc: 25;
 
 .cover {
   position: fixed;
-  top: 0;
-  z-index: 999;
+  top: 0; 
+  opacity: 0;
+  z-index: -10;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
 }
+.coverhid{
+  opacity: 1;
+  z-index: 999;
+}
+
+/* 左边栏导航 */
 .close {
   left: -286/$sc+rem !important;
 }

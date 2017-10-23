@@ -1,5 +1,6 @@
 <template>   
     <div class="my-header">
+        <sidebar :isclose="showsidenav"></sidebar> 
         <div class="container">
         <div class="header">
             <div><span><i class="iconfont red">&#xe607;</i></span></div>
@@ -15,9 +16,22 @@
 </template>
 
 <script>
-import "common/style/layout.css";
+
+import sidebar from 'components/sidebar'
 export default {
-  components: {}
+  data(){
+    return {
+      showsidenav: false,
+    }
+  },
+  created(){
+    
+    console.log(this.showsidenav) 
+  },
+  
+  components: {
+    sidebar
+  }
 };
 </script>
 
