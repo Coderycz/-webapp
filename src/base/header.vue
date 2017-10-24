@@ -1,9 +1,8 @@
 <template>   
-    <div class="my-header">
-        <sidebar :isclose="showsidenav"></sidebar> 
+    <div class="my-header" >     
         <div class="container">
         <div class="header">
-            <div><span><i class="iconfont red">&#xe607;</i></span></div>
+            <div @click="showside"><span><i class="iconfont red" >&#xe607;</i></span></div>
             <div class="h-center">               
                 <span class="active"><i class="iconfont red">&#xe680;</i></span>
                 <span><i class="iconfont red">&#xe601;</i></span>
@@ -17,20 +16,24 @@
 
 <script>
 
-import sidebar from 'components/sidebar'
+
 export default {
   data(){
     return {
       showsidenav: false,
     }
   },
-  created(){
-    
+  methods:{  
+    showside(){
+     this.$store.commit("change")
+    }
+  },
+  created(){  
     console.log(this.showsidenav) 
   },
   
   components: {
-    sidebar
+    
   }
 };
 </script>

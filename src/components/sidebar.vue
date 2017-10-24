@@ -1,8 +1,8 @@
 <template>
   <div class="sidebar">
     
-    <div class="cover" @click="close(isclose)" :class="{'coverhid':!isclose}"></div>
-    <div class="bar " :class="{'close':isclose}">
+    <div class="cover" @click="close" :class="{'coverhid':!flag}"></div>
+    <div class="bar " :class="{'close':flag}">
             <div class="bg">            
                <img src="http://oiq8j9er1.bkt.clouddn.com/music_%E7%8A%AC%E5%A4%9C%E5%8F%89.jpg"/>
                 <div class="information">
@@ -70,7 +70,8 @@
 export default {
   props:['isclose'],
   data() {
-    return {    
+    return { 
+     
       uls1: {
         icon: ["icon-xiaoxi", "icon-huiyuan", "icon-shangcheng"],
         info: ["我的消息", "会员中心", "商城"]
@@ -81,17 +82,24 @@ export default {
       }
     };
   },
+  computed:{
+    flag(){
+      return this.$store.state.showsidebar
+    }
+  },
   methods: {
     add() {
       console.log("sdf");
     },
-    
-    close(b) {
-      this.isclose = !b;
-      console.log(this.isclose+"----")
-      this.$emit("changeflag",!b)
+    close(){     
+      this.$store.commit("change")
     }
- 
+    
+    /* close(isclose) { 
+      this.flag = !isclose;
+      console.log(isclose+"----")
+      this.$emit("changeflag",isclose)
+    } */
   }
 };
 </script>
