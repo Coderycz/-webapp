@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    
+    <sidebar></sidebar> 
     <transition name="flod" mode="out-in">
       <router-view/>
     </transition>
@@ -11,6 +11,8 @@
 <script>
 import "common/style/reset.css";
 import "common/style/layout.css";
+import sidebar from 'components/sidebar'
+    
 
 document.documentElement.style.fontSize = innerWidth / 15 + "px";
 document.getElementById("app").style.height = innerHeight + "px";
@@ -20,7 +22,7 @@ document.getElementById("app").style.height = innerHeight + "px";
 export default {
   name: 'app',
   components:{
-    
+    sidebar
   }
 }
 </script>
