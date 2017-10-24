@@ -7,7 +7,7 @@
         <ul>
             <li class="mid"  v-for="(v,k) in list" >
                 <img :src="v.picUrl"/>
-                <p>{{v.songListDesc}}</p>
+                <div>{{v.songListDesc}}</div>
             </li>
         </ul>
     </div>
@@ -28,52 +28,53 @@ $sc: 25;
   h2 {
     display: inline-block;
     vertical-align: middle;
-    height: 18px;
-    line-height: 18px;
-    letter-spacing: 2px;
+    height: 18/$sc+rem;
+    line-height: 18/$sc+rem;
+    letter-spacing: 2/$sc+rem;
     position: relative;
     color: #333;
-    font-size: 16px;
+    font-size: 16/$sc+rem;
     font-weight: 400;
-    padding-left: 12px;
-    border-left: 2px solid red;
-    margin: 8px 0;
+    padding-left: 12/$sc+rem;
+    border-left: 2/$sc+rem solid red;
+    margin: 8/$sc+rem 0;
   }
   span {
     display: inline-block;
-    height: 34px;
-    line-height: 34px;
+    height: 34/$sc+rem;
+    line-height: 34/$sc+rem;
     i {
-      font-size: 14px;
+      font-size: 14/$sc+rem;
     }
   }
   ul {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin: 0 -1px 10px;
-    width: 381px;
+    margin: 0 -1/$sc+rem 10/$sc+rem;
+    width: 381/$sc+rem;
     li {
       width: 33.33%;
       &.mid {
-        padding: 0 1px;
+        padding: 0 1/$sc+rem;
       }
     }
   }
   img {
     width: 100%;
   }
-  p {
+  div {
     width: 100%;
-    height: 34px;
-    line-height: 16px;
-    margin: 4px 0;
-    padding: 0 3px;
+    height: 34/$sc+rem;
+    line-height: 16/$sc+rem;
+    margin: 4/$sc+rem 0;
+    padding: 0 3/$sc+rem;
     box-sizing: border-box;
     color: #333;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+  
   }
 }
 </style>

@@ -4,6 +4,7 @@
     <transition name="flod" mode="out-in">
       <router-view/>
     </transition>
+    <minilist></minilist>
     
   </div>
 </template>
@@ -12,17 +13,17 @@
 import "common/style/reset.css";
 import "common/style/layout.css";
 import sidebar from 'components/sidebar'
+import minilist from '@/base/minisonglist'
     
 
 document.documentElement.style.fontSize = innerWidth / 15 + "px";
 document.getElementById("app").style.height = innerHeight + "px";
 
-
-
 export default {
   name: 'app',
   components:{
-    sidebar
+    sidebar,
+    minilist
   }
 }
 </script>

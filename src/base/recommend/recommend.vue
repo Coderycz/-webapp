@@ -63,33 +63,34 @@ export default {
 
 <style lang="scss" scoped>
 /* sjdlksjdfl */
+$sc:25;
 .reccontent {
   width: 100%;
   position: absolute;
   top: 2rem;
   left: 0;
   right: 0;
-  bottom: 2rem;
+  bottom: 46/$sc+rem;
   overflow-x: hidden; 
 }
 .nav {
-  margin: 0 20px;
-  height: 36px;
-  font-size: 14px;
+  margin: 0 20/$sc+rem;
+  height: 36/$sc+rem;
+  font-size: 14/$sc+rem;
   display: flex;
-  line-height: 36px;
+  line-height: 36/$sc+rem;
   justify-content: space-around;
   div {
-    width: 70px;
+    width: 70/$sc+rem;
     text-align: center;
   }
   .active {
-    border-bottom: 2px solid red;
+    border-bottom: 2/$sc+rem solid red;
   }
 }
 .flex {
   display: flex;
-  height: 90px;
+  height: 90/$sc+rem;
   justify-content: space-around;
   align-items: center;
 }
@@ -97,31 +98,31 @@ export default {
 .banner-down{
     position: absolute;
     width: 100%;
-    top: 198px;
+    top: 198/$sc+rem;
 }
 .navicon {
   @extend .flex;
   div {
     @extend .flex;
     flex-direction: column;
-    padding: 10px 0;
+    padding: 10/$sc+rem 0;
   }
   i {
     display: inline-block;
     color: #c62f2f;
-    font-size: 25px;
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
+    font-size: 25/$sc+rem;
+    width: 50/$sc+rem;
+    height: 50/$sc+rem;
+    line-height: 50/$sc+rem;
     text-align: center;
-    border: 1px solid #c62f2f;
+    border: 1/$sc+rem solid #c62f2f;
     border-radius: 50%;
   }
   p {
-    font-size: 12px;
+    font-size: 12/$sc+rem;
     font-weight: 400;
     margin: 0;
-    margin-top: 8px;
+    margin-top: 8/$sc+rem;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;

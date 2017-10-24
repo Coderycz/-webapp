@@ -11,7 +11,7 @@
             </div>
             <div class="rightmenu">               
                 <span @click.stop="play"><i class="iconfont">&#xe600;</i></span>                
-                <span @click.stop="menu"><i class="iconfont">&#xe604;</i></span>            
+                <span @click.stop="showmini"><i class="iconfont">&#xe604;</i></span>            
             </div>           
         </router-link>
     </div>
@@ -21,7 +21,12 @@
 <script>
 import "common/style/layout.css";
 export default {
-  components: {}
+  components: {},
+  methods:{
+    showmini(){
+     this.$store.commit("changemini")
+    }
+  }
 };
 </script>
 
@@ -61,6 +66,7 @@ $sc: 25;
   .rightmenu {
     float: right;
     span {
+      display: inline-block;
       margin-left: 10/$sc+rem;
       height: 36/$sc+rem;
       width: 36/$sc+rem;

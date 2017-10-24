@@ -47,8 +47,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$sc: 25;
 .container{
-    height: 160px;
+    height: 160/$sc+rem;
     position: fixed;
     top: 4rem;
   
@@ -57,7 +58,7 @@ export default {
     width: 100%;
   img {
     width: 100%;
-    height: 160px;
+    height: 160/$sc+rem;
   }
 }
 </style>
