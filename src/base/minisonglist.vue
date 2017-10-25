@@ -32,9 +32,7 @@
                     
                     <i class="iconfont icon-chuyidong"></i>
                 </li>
-
-            </ul>
-        
+            </ul>       
     </div> 
 </div>  
   

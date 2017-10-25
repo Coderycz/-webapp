@@ -14,6 +14,7 @@ import mySonglist from "@/base/songlist.vue"
 import myHeader from "../base/header"
 import myBody from "../base/mainpage"
 import myFooter from "../base/footer"
+import {play,stop} from "api/audio"
 
 
 
@@ -21,7 +22,9 @@ export default {
   
   name: 'HelloWorld',
   data () {
+
     return {
+      
       msg: 'Welcome to Your Vue.js App'
     }
   },
@@ -31,6 +34,7 @@ export default {
    // this.getc()
   },
   methods:{
+    
     _get(){
       getRecommend().then((res) => {
         if(res.code === 0){

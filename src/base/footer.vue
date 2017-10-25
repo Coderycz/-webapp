@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div class="rightmenu">               
-                <span @click.stop="play"><i class="iconfont">&#xe600;</i></span>                
+                <span @click.stop="playmu"><i class="iconfont" :class="isplayicon"></i></span>                
                 <span @click.stop="showmini"><i class="iconfont">&#xe604;</i></span>            
             </div>           
         </router-link>
@@ -20,12 +20,41 @@
 
 <script>
 import "common/style/layout.css";
+import {play} from "api/audio.js"
 export default {
+  data(){
+    return {
+    }
+  },
   components: {},
+  computed:{
+    isPlaying(){
+      return this.$store.state.isplay
+    },
+    isplayicon(){
+      return this.$store.state.isplay?"icon-zanting":"icon-bofang"
+      /* if(this.$store.state.isplay){
+        return "icon-zanting"
+        
+      }else{
+        return "icon-bofang"
+      } */
+    }
+
+  },
   methods:{
     showmini(){
      this.$store.commit("changemini")
-    }
+    },
+    playmu(){
+      var audio =document.querySelector('audio');
+        if(!this.isPlaying){
+            audio.play();                  
+        }else{
+          audio.pause();
+        }
+        this.$store.commit("changeplay")
+    },
   }
 };
 </script>

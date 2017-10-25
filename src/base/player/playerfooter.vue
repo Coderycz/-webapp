@@ -20,7 +20,7 @@
 <!-- 进度条 -->
 <div class="y-footer">
    <div class="range">
-       <span>00:00</span>
+       <span>{{playtime}}</span>
        <div class="pragress">
       <div class="value">
       </div>
@@ -31,7 +31,12 @@
 
 <!-- 尾部 -->
   <div class="control" >
-      <i v-for="(v,k) in icondata" class="iconfont" :class="v" ></i>
+      <i class="iconfont icon-xunhuanbofang" ></i>
+      <i class="iconfont icon-shangyiqu101"></i>
+      <i class="iconfont " :class="isplayicon" @click="play"></i>
+      <i class="iconfont icon-xiayiqu101"></i>
+      <i class="iconfont icon-caidan"></i>
+      
   </div>
   </div>
 </div>
@@ -40,31 +45,61 @@
 <script>
 import playercd from "@/base/player/playercd";
 import showlyric from "@/base/player/lyric";
+var audio =document.querySelector('audio');
+var timer = ""
 export default {
   data() {
     return {
+      timeed: 0,
       islike: false,
-      lyric: true,
-      icondata: [
-        "icon-xunhuanbofang",
-        "icon-shangyiqu101",
-        "icon-bofang",
-        "icon-xiayiqu101",
-        "icon-caidan"
-      ]
+      lyric: true,    
     };
   },
+  created(){
+    this.$store.commit("changetime",audio.currentTime)
+    timer = setInterval(this.gettime,300)
+  },
   methods: {
+    gettime(){
+      this.timeed =  audio.currentTime  
+    },
     showlyric() {
       this.lyric = !this.lyric;
       console.log(this.lyric);
     },
     goback(){
       return this.$router.go(-1)
-    }
-    
+    },
+    play(){     
+        if(!this.isPlaying){
+          audio.play();
+          timer = setInterval(this.gettime,500)                  
+        }else{
+          audio.pause();
+          clearInterval(timer)
+        }
+        this.$store.commit("changeplay")
+    }, 
   },
-
+  watch:{
+    timeed(n){
+      this.$store.commit("changetime",n)
+    }
+  },
+  computed:{  
+    playtime(){
+      var gett = this.$store.state.playtime;
+      var min = (parseInt(gett/60)+'').padStart(2,'0')
+      var sec = (parseInt(gett%60)+'').padStart(2,'0')
+      return `${min}:${sec}`
+    } ,
+    isplayicon(){
+      return this.$store.state.isplay?"icon-zanting":"icon-bofang"
+    },
+    isPlaying(){
+      return this.$store.state.isplay
+    },
+  },
   components: {
     playercd,
     showlyric
