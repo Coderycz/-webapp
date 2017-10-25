@@ -25,12 +25,12 @@
             <ul class="songlist">
                 <li>
                     <div>
-                        <i class="iconfont "></i>
-                        <span>歌名</span> - 
-                        <span>歌手</span>
+                        <i class="iconfont icon-shengyin red"></i>
+                        <span class="songname">歌名</span> - 
+                        <span class="singer">歌手</span>
                     </div>
                     
-                    <i class="iconfont "></i>
+                    <i class="iconfont icon-chuyidong"></i>
                 </li>
 
             </ul>
@@ -132,10 +132,23 @@ $sc: 25;
     li{
         height: 42px;
         width: 100%;
+        @extend .flex;
+        align-items: center;
         border-bottom: 1px solid rgba(7,17,27,.1);
         div{
             height: 42px;
         line-height: 42px;
+        }
+        .red{
+            font-size: 14px;
+            color: red;
+        }
+        .songname{
+            font-size: 14px
+        }
+        .singer{
+            font-size: 12px;
+            color: #999;
         }
     }
 

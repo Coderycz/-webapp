@@ -7,7 +7,7 @@
         <ul>
             <li class="mid"  v-for="(v,k) in list" >
                 <img :src="v.picUrl"/>
-                <div>{{v.songListDesc}}</div>
+                <div class="dis">{{v.songListDesc}}</div>
             </li>
         </ul>
     </div>
@@ -63,7 +63,7 @@ $sc: 25;
   img {
     width: 100%;
   }
-  div {
+  .dis {
     width: 100%;
     height: 34/$sc+rem;
     line-height: 16/$sc+rem;

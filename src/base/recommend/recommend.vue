@@ -8,7 +8,7 @@
     <banner :list="list.slider"></banner>
     <div class="banner-down"> 
     <div class="navicon">
-        <div v-for="(v,k) in navicon.icon">
+        <div class="dis" v-for="(v,k) in navicon.icon">
             <i class="iconfont " :class="navicon.icon[k]"></i>
             <p class="">{{navicon.info[k]}}</p>
         </div>
@@ -72,6 +72,7 @@ $sc:25;
   right: 0;
   bottom: 46/$sc+rem;
   overflow-x: hidden; 
+  
 }
 .nav {
   margin: 0 20/$sc+rem;

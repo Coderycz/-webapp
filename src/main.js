@@ -6,9 +6,15 @@ import router from './router'
 import fastclick from 'fastclick'
 import Vuex from 'vuex';
 import store from '@/vuex/index'
+import VueLazyload from 'vue-lazyload'
 Vue.use(Vuex);
 fastclick.attach(document.body)
 
+Vue.use(VueLazyload, {
+  //error: 'dist/error.png',//这个是请求失败后显示的图片
+  loading: require('@/assets/images/loading.gif'),//这个是加载的loading过渡效果
+  try: 2 // 这个是加载图片数量
+  })
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
