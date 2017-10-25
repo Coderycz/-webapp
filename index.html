@@ -18,11 +18,20 @@
       li{
         list-style: none;
       }
+      audio{
+        position: fixed;
+        top: 50px;
+        z-index: 9999999;
+      } 
     </style>
   </head>
   <body>
-
-    <div id="app"></div>
+        <audio controls>
+          <source src="http://m10.music.126.net/20171025181742/72301f53eb7854388c8cee5f78f764d3/ymusic/7c24/f290/c312/cd18b0fb31670b552bf3243dd155de9b.mp3" type="audio/mpeg">
+          您的浏览器不支持 audio 元素。
+        </audio>
+          
+      <div id="app"></div> 
     <!-- built files will be auto injected -->
   </body>
 </html>

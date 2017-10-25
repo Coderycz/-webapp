@@ -1,11 +1,11 @@
 <template>
   <div id="app">
+    
     <sidebar></sidebar> 
     <transition name="flod" mode="out-in">
       <router-view/>
-    </transition>
+    </transition> 
     <minilist></minilist>
-    
   </div>
 </template>
 
