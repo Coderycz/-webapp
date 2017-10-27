@@ -33,9 +33,9 @@
 </div>  
 
 <!-- 尾部 -->
-  <div class="describing" v-show="changetype">{{describing[i]}}</div>
+  <div class="describing" v-show="changetype">{{describing[typenum]}}</div>
   <div class="control" >   
-      <i class="iconfont " :class="playtype1[i]" @touchstart="playtype"></i>
+      <i class="iconfont " :class="playtype1[typenum]" @touchstart="playtype"></i>
       <i class="iconfont icon-shangyiqu101"></i>
       <i class="iconfont " :class="isplayicon" @click="play"></i>
       <i class="iconfont icon-xiayiqu101"></i>
@@ -61,7 +61,7 @@ export default {
       islike: false,    
       lyric: true,
       dargtime: 0,      //拖拽时长   
-      changetype: flase,   
+      changetype: false,   
     };
   },
   created() { 
@@ -134,10 +134,10 @@ export default {
     },
     playtype(){
       this.changetype = true;
-      setTimeout(function(){
+      setInterval(function(){
         this.changetype = false;
-      },1000)
-      this.$store.commit("changei")
+      },500)
+      this.$store.commit("changetype")
     },
     /* 返回 */
     showlyric() {
@@ -157,12 +157,11 @@ export default {
       this.$store.commit("changetime", n);
     },
     sumtime(){
-
     }
   },
   computed: {
-    i(){
-      return this.$store.state.i
+    typenum(){
+      return this.$store.state.typenum
     },
     playtype1(){
       return this.$store.state.type

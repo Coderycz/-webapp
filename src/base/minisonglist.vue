@@ -5,8 +5,8 @@
     <div class="bar " :class="{'close':flag}">
         <div class="title">
             <div class="palytype" @touchstart="playtype">
-                <i class="iconfont icon-liebiaoxunhuan" :class="playtype1[i]" ></i>
-                <span class="typename">{{describing[i]}}</span>
+                <i class="iconfont icon-liebiaoxunhuan" :class="playtype1[typenum]" ></i>
+                <span class="typename">{{describing[typenum]}}</span>
                 <span>(1)</span>
             </div>
             <div class="right">
@@ -46,8 +46,8 @@ export default {
     };
   },
   computed:{
-      i(){
-      return this.$store.state.i
+      typenum(){
+      return this.$store.state.typenum
     },
     playtype1(){
       return this.$store.state.type
@@ -62,7 +62,7 @@ export default {
   },
   methods: {
       playtype(){
-           this.$store.commit("changei")
+           this.$store.commit("changetype")
       },
     add() {
       console.log("sdf");
