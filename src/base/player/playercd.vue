@@ -1,10 +1,11 @@
 <template>
     <div class="cd" >
         <div class="line">
-            <div class="pointer ">
+            <div class="pointer " :class="{'pause':!isplay}">
             </div>
         </div>
-        <div class="cdpic">
+        
+        <div class="cdpic" :class="{'test1':isplay}">
             <img src="http://oiq8j9er1.bkt.clouddn.com/music_qingnianwanbao.jpg"/>
         </div>
         <div class="like-container">
@@ -26,12 +27,18 @@ export default {
             islike: true
         }
     },
-    methods:{
-changelike(){
+    warch:{
       
-        this.islike = !this.islike
     },
-    
+    methods:{
+        changelike(){     
+        this.islike = !this.islike
+       },   
+    },
+    computed:{
+      isplay(){
+        return this.$store.state.isplay
+      }
     }
     
 };
@@ -69,7 +76,7 @@ $sc: 25;
     background-size: cover;
     -webkit-transform-origin: 14/$sc+rem 16/$sc+rem;
     transform-origin: 14/$sc+rem 16/$sc+rem;
-    transition: all 0.3s;
+    transition: all 0.3s ease-out;
     z-index: 5;
   }
   .pause {
@@ -78,6 +85,14 @@ $sc: 25;
 }
 
 /* cd盘用vh实现百分比宽高 */
+@-webkit-keyframes skyset {
+    0% { transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}
+.test1 {
+  animation: skyset 16s linear infinite .1s; 
+} 
+
 .cdpic {
   width: 44vh;
   height: 44vh;
