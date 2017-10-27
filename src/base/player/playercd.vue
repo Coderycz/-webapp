@@ -1,11 +1,11 @@
 <template>
     <div class="cd" >
         <div class="line">
-            <div class="pointer " :class="{'pause':!isplay}">
+            <div style="'background-image': 'url(../../assets/images/swith.png)'" class="pointer " :class="{'pause':!isplay}">
             </div>
         </div>
         
-        <div class="cdpic" :class="{'test1':isplay}">
+        <div style="'background': 'url(../../assets/images/cd-mine.png')" class="cdpic" :class="{'test1':isplay}">
             <img src="http://oiq8j9er1.bkt.clouddn.com/music_qingnianwanbao.jpg"/>
         </div>
         <div class="like-container">
@@ -72,7 +72,7 @@ $sc: 25;
     transform: translate3d(-16/$sc+rem, 0, 0);
     width: 13.5vh;
     height: 21vh;
-    background-image: url("../../assets/images/swith.png");
+  
     background-size: cover;
     -webkit-transform-origin: 14/$sc+rem 16/$sc+rem;
     transform-origin: 14/$sc+rem 16/$sc+rem;
@@ -99,7 +99,7 @@ $sc: 25;
   position: relative;
   margin: 0 auto;
   margin-top: 8vh;
-  background: url("../../assets/images/cd-mine.png");
+  
   background-size: cover;
   img {
     position: absolute;
