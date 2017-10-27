@@ -7,6 +7,10 @@ export default new Vuex.Store({
         showminilist: true,             /* 显示底部迷你菜单 */
         isplay:false,                   /* 是否正在播放 */
         playtime: 0,                    /* 以播放时长 */
+        duration: 0,                    /* 总时长 */
+        i: 0,
+        type : ["icon-suijibofang","icon-liebiaoxunhuan","icon-danquxunhuan"],
+        describing: ["随机播放","列表循环","单曲循环"],
 
     },
     mutations:{
@@ -21,6 +25,13 @@ export default new Vuex.Store({
         },
         changetime(state,b){
             state.playtime = b
+        },
+        getsumtime(state,b){
+            state.duration = b
+        },
+        changei(state){
+            state.i++;
+            state.i= state.i>2 ? 0 : state.i
         }
 
 

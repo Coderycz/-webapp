@@ -4,9 +4,9 @@
     <div class="cover" @click="close" :class="{'coverhid':!flag}"></div>
     <div class="bar " :class="{'close':flag}">
         <div class="title">
-            <div class="palytype">
-                <i class="iconfont icon-liebiaoxunhuan"></i>
-                <span class="typename">单曲循环</span>
+            <div class="palytype" @touchstart="playtype">
+                <i class="iconfont icon-liebiaoxunhuan" :class="playtype1[i]" ></i>
+                <span class="typename">{{describing[i]}}</span>
                 <span>(1)</span>
             </div>
             <div class="right">
@@ -28,8 +28,7 @@
                         <i class="iconfont icon-shengyin red"></i>
                         <span class="songname">歌名</span> - 
                         <span class="singer">歌手</span>
-                    </div>
-                    
+                    </div>                    
                     <i class="iconfont icon-chuyidong"></i>
                 </li>
             </ul>       
@@ -47,11 +46,24 @@ export default {
     };
   },
   computed:{
+      i(){
+      return this.$store.state.i
+    },
+    playtype1(){
+      return this.$store.state.type
+    },
+    describing(){
+      return this.$store.state.describing
+    },
+
     flag(){
       return this.$store.state.showminilist
     }
   },
   methods: {
+      playtype(){
+           this.$store.commit("changei")
+      },
     add() {
       console.log("sdf");
     },

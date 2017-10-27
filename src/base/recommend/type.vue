@@ -6,7 +6,7 @@
         </div>
         <ul>
             <li class="mid"  v-for="(v,k) in list" >
-                <img :src="v.picUrl"/>
+                <img v-lazy="v.picUrl"/>
                 <div class="dis">{{v.songListDesc}}</div>
             </li>
         </ul>
