@@ -2,13 +2,13 @@
     <div class="my-header" >     
         <div class="container">
         <div class="header">
-            <div @click="showside"><span><i class="iconfont red" >&#xe607;</i></span></div>
+            <div @click="showside"><span><i class="iconfont red icon-menu active" ></i></span></div>
             <div class="h-center">               
-                <span class="active"><i class="iconfont red">&#xe680;</i></span>
-                <span><i class="iconfont red">&#xe601;</i></span>
-                <span><i class="iconfont red">&#xe603;</i></span>
+                <router-link tag="span" to="/" :class="{active:this.active==1}" @click.native="witch(1)"><i class="iconfont red">&#xe680;</i></router-link>
+                <router-link tag="span" to="/recommend" :class="{active:this.active==2}" @click.native="witch(2)"><i class="iconfont red">&#xe601;</i></router-link>
+                <router-link tag="span" to="/" :class="{active:this.active==3}" @click.native="witch(3)"><i class="iconfont red">&#xe603;</i></router-link>
             </div>
-            <div><span><i class="iconfont red">&#xe610;</i></span></div>
+            <div><span><i class="iconfont red active">&#xe610;</i></span></div>
         </div>
     </div>
     </div>
@@ -21,9 +21,19 @@ export default {
   data(){
     return {
       showsidenav: false,
+      
     }
   },
-  methods:{  
+  computed:{
+    active(){
+      return this.$store.state.witch
+    }
+  },
+  methods:{ 
+    witch(b){
+      this.$store.commit('witchone',b)
+      console.log(this.active)
+    } ,
     showside(){
      this.$store.commit("change")
     }
@@ -62,7 +72,10 @@ span {
     color: #aaa;
   }
 }
-.active i {
-  color: #eee !important;
+.active  i{
+  color: #eee;
+}
+.active{
+  color: #eee;
 }
 </style>

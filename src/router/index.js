@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import player from '@/components/player'
 import recommend from '@/components/recommend'
+import songlist from '@/components/songlist'
 
 Vue.use(Router)
 
@@ -18,6 +19,9 @@ export default new Router({
     },{
       path: '/recommend',
       component: recommend
+    },{
+      path: '/songlist',
+      component: songlist
     }
   ]
 })

@@ -9,7 +9,7 @@
                <span class="fr ricon icons"><i class="iconfont">&#xe611;</i></span>
            </div>
         <ul v-show="showsonglist" v-for="(v,k) in lists">
-            <router-link tag="li" to="/player" :class="{'y-footer':true}">              
+            <router-link tag="li" to="/songlist" :class="{'y-footer':true}">              
                 <div class="leftinfo">
                     <img src="" alt="">                 
                 </div>

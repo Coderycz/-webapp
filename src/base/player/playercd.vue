@@ -5,7 +5,7 @@
             </div>
         </div>
         
-        <div style="'background': 'url(../../assets/images/cd-mine.png')" class="cdpic" :class="{'test1':isplay}">
+        <div style="background-image: url(../../assets/images/cd-mine.png)" class="cdpic" :class="{'test1':isplay}">
             <img src="http://oiq8j9er1.bkt.clouddn.com/music_qingnianwanbao.jpg"/>
         </div>
         <div class="like-container">
@@ -14,7 +14,7 @@
             <i class="iconfont icon-xiazai" @click.stop=""></i>
             <span class="pinlun" @click.stop=""><i class="iconfont icon-xinxi"></i><span class="num">999+</span></span>
             
-            <i class="iconfont icon-gengduo" @click.stop=""></i>
+            <i  class="iconfont icon-gengduo" @click.stop=""></i>
             </div>     
         </div>
     </div>
@@ -39,8 +39,7 @@ export default {
       isplay(){
         return this.$store.state.isplay
       }
-    }
-    
+    }    
 };
 </script>
 

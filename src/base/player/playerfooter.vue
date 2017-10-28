@@ -21,7 +21,7 @@
 <div class="y-footer">
    <div class="range">
       <span>{{playtime}}</span>
-      <div class="pragress" ref="pragress">
+      <div class="pragress" ref="pragress" @touchstart="touchrange">
           <div class="value" ref="valued"></div>
           <span class="cricle" ref="cricle"
           @touchstart.stop="touchstart"
@@ -75,6 +75,24 @@ export default {
   },
   methods: {
     /* 进度条事件 */
+    //点击进度条
+    touchrange(ev){
+        
+        let e = ev || window.event
+				let mouseX = e.pageX || e.touches[0].pageX              //鼠标离屏幕右边的距离
+				let offsetLeft = this.$refs.pragress.offsetLeft           //进度条距离屏幕右边的距离
+        let pragresswidth = this.$refs.pragress.offsetWidth       //进度条长度
+
+        var length = (mouseX - offsetLeft - this.$refs.cricle.offsetWidth) / (pragresswidth-this.$refs.cricle.offsetWidth)
+        length = length > 1 ? 1 : length
+        length = length < 0 ? 0 : length
+        this.dragtime = length
+       
+        //移动时改变已播放 进度条 和 滑点 位置
+        this.$refs.valued.style.width = length *pragresswidth+"px"
+        this.$refs.cricle.style.left = length *(pragresswidth-this.$refs.cricle.offsetWidth)+"px"    
+       audio.currentTime = audio.duration*this.dragtime 
+    },
     touchstart(){
       istouch = true;
     },
@@ -83,7 +101,7 @@ export default {
           return
         }
         let e = ev || window.event
-				let mouseX = ev.pageX || ev.touches[0].pageX              //鼠标离屏幕右边的距离
+				let mouseX = e.pageX || e.touches[0].pageX              //鼠标离屏幕右边的距离
 				let offsetLeft = this.$refs.pragress.offsetLeft           //进度条距离屏幕右边的距离
         let pragresswidth = this.$refs.pragress.offsetWidth       //进度条长度
 
