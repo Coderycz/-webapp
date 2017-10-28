@@ -2,7 +2,7 @@
 <div class="recommend">
     <my-header></my-header>
     <recommend></recommend>
-    <my-footer></my-footer>
+    
  </div> 
 </template>
 

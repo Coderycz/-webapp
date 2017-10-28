@@ -5,7 +5,7 @@
       <div class="cover"></div>
       <div class="header">
           <div class="left">
-              <i class="iconfont icon-zuo" @touchend="goback"></i>
+              <router-link tag="i" to="/" class="iconfont icon-zuo" ></router-link>
               <p>歌单</p>
           </div>
           <div class="right">
@@ -15,7 +15,7 @@
       </div>
         <!-- img -->
       <div class="img">
-          <div class="songpic ">
+          <div class="songpic">
             <img class="songimg"/>
             <div class="info">
               <p class="title">抖腿向</p>

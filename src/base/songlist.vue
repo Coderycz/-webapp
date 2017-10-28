@@ -8,14 +8,14 @@
                     </div>              
                <span class="fr ricon icons"><i class="iconfont">&#xe611;</i></span>
            </div>
-        <ul v-show="showsonglist" v-for="(v,k) in lists">
-            <router-link tag="li" to="/songlist" :class="{'y-footer':true}">              
+        <ul v-show="showsonglist" v-for="(v,k) in createdlist">
+            <router-link tag="li" to="/songlist" :class="{'y-footer':true}" @touchstart.native="senddissid(createdlist[k].dissid)">              
                 <div class="leftinfo">
-                    <img src="" alt="">                 
+                    <img :src="createdlist[k].imgurl" alt="">                 
                 </div>
-                <div :class="{'rightmenu':true,'bordernone': k==lists.length-1}">
+                <div :class="{'rightmenu':true,'bordernone': k==createdlist.length-1}">
                     <div class="songname">
-                        <p class="name">我喜欢的音乐</p>
+                        <p class="name">{{createdlist[k].dissname}}</p>
                         <p class="gou"><i class="iconfont">&#xe615;</i>221首，已下载180首</p>
                     </div>                                  
                     <span><i class="iconfont">&#xe613;</i></span>
@@ -28,16 +28,32 @@
 </template>
 
 <script>
-import "common/style/layout.css";
+
+import {getRecommend,getDiscList} from "api/jsonpdata"
 export default {
   data() {
     return {
         showsonglist: false,
         deg:false,
+        createdlist:[],
         lists: ["sdfsdf","sdfsdfsdfsdfsd"]
     };
   },
+  created(){
+    this._getlist()
+  },
   methods: {
+    senddissid(num){
+      this.$store.commit('changedissid',num)
+    },
+    _getlist(){
+      getDiscList().then((res) => {
+        if(res.code === 0){
+          this.createdlist = res.data.list.slice(0,6)         
+          console.log(this.createdlist)
+        }
+      })
+    },
     changshow() {
       this.showsonglist = !this.showsonglist;
       this.deg = !this.deg

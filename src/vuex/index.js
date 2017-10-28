@@ -11,6 +11,7 @@ export default new Vuex.Store({
         duration: 0,                    /* 总时长 */
         volume: 1,
         typenum: 0,                     /* 播放类型 */
+        dissid: 0,                      /* 歌单id */   
         type : ["icon-suijibofang","icon-liebiaoxunhuan","icon-danquxunhuan"],
         describing: ["随机播放","列表循环","单曲循环"],
 
@@ -40,6 +41,9 @@ export default new Vuex.Store({
         },
         changevolume(state,b){
             state.volume = b
+        },
+        changedissid(state,b){
+            state.dissid = b
         }
 
 

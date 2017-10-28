@@ -5,6 +5,7 @@
     <transition name="flod" mode="out-in">
       <router-view/>
     </transition> 
+    <my-footer></my-footer>
     <minilist></minilist>
   </div>
 </template>
@@ -14,6 +15,7 @@ import "common/style/reset.css";
 import "common/style/layout.css";
 import sidebar from 'components/sidebar'
 import minilist from '@/base/minisonglist'
+import myFooter from '@/base/footer'
     
 
 document.documentElement.style.fontSize = innerWidth / 15 + "px";
@@ -23,7 +25,8 @@ export default {
   name: 'app',
   components:{
     sidebar,
-    minilist
+    minilist,
+    myFooter
   }
 }
 </script>

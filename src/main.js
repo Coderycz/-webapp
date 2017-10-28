@@ -7,6 +7,8 @@ import fastclick from 'fastclick'
 import Vuex from 'vuex';
 import store from '@/vuex/index'
 import VueLazyload from 'vue-lazyload'
+import VueResource from 'vue-resource'
+Vue.use(VueResource)
 Vue.use(Vuex);
 fastclick.attach(document.body)
 

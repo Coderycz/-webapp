@@ -3,59 +3,55 @@
     
     <my-header></my-header>
     <my-body></my-body>
-    <my-footer></my-footer>
+    
     
   </div>
 </template>
 
 <script>
-import {getRecommend,getDiscList} from "api/jsonpdata"
+import {getRecommend,getSongList,getperson,gethot} from "api/jsonpdata"
 import mySonglist from "@/base/songlist.vue"
 import myHeader from "../base/header"
 import myBody from "../base/mainpage"
 import myFooter from "../base/footer"
 import {play,stop} from "api/audio"
 
-
-
-export default {
-  
+export default {  
   name: 'HelloWorld',
   data () {
-
-    return {
-      
-      msg: 'Welcome to Your Vue.js App'
+    return {     
+      createdlist: [],
+      collectlist: '',         
     }
   },
   created(){
+    console.log(this.list,html)
     this._get()
-    this._getlist()
-   // this.getc()
-  },
-  methods:{
     
+    getSongList(1183607014).then((res)=>{
+        if(res.code === 0){
+          console.log(res)
+        }
+      }) 
+  },
+  methods:{   
     _get(){
       getRecommend().then((res) => {
         if(res.code === 0){
-          console.log(res.data)
+          //console.log(res.data)
         }
       })
     },
-    _getlist(){
-      getDiscList().then((res) => {
-        if(res.code === 0){
-          console.log(res.data)
-        }
-      })
+    getsong(num){
+      
     },
-    getc(){
+    /* getc(){
       getclund().then((res) => {
         if(res.code === 0){
           console.log(res.data)
         }
       })
-    }
+    } */
   },
 
   components:{

@@ -31,8 +31,8 @@ apiRoutes.get('/getDiscList', function (req, res) {
   var url = 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg'
   axios.get(url, {
     headers: {
-      referer: 'https://c.y.qq.com/',
-      host: 'c.y.qq.com'
+      //referer: 'https://c.y.qq.com/',
+      //host: 'c.y.qq.com'
     },
     params: req.query
   }).then((response) => {
@@ -42,8 +42,10 @@ apiRoutes.get('/getDiscList', function (req, res) {
   })
 })
 
-/* apiRoutes.get('/getDiscList', function (req, res) {
-  var url = 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg'
+
+
+ apiRoutes.get('/gethot', function (req, res) {
+  var url = 'https://u.y.qq.com/cgi-bin/musicu.fcg?callback=callbackfunction&g_tk=676735114&jsonpCallback=recom11710349407046405&loginUin=0&hostUin=0&format=jsonp&inCharset=utf8&outCharset=utf-8&notice=0&platform=yqq&needNewCode=0&data=%7B%22comm%22%3A%7B%22ct%22%3A24%7D%2C%22new_song%22%3A%7B%22module%22%3A%22QQMusic.MusichallServer%22%2C%22method%22%3A%22GetNewSong%22%2C%22param%22%3A%7B%22type%22%3A1%7D%7D%7D'
   axios.get(url, {
     headers: {
       referer: 'https://c.y.qq.com/',
@@ -55,7 +57,9 @@ apiRoutes.get('/getDiscList', function (req, res) {
   }).catch((e) => {
     console.log(e)
   })
-}) */
+}) 
+
+
 app.use('/api',apiRoutes)
 
 

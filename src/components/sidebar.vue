@@ -13,7 +13,6 @@
                     <div class="sign"><span><i class="icon iconfont icon-iconfontcoin"></i></span>签到</div>
                 </div>
             </div>
-
         <div class="uls">
           {{isclose}}
         <ul >
@@ -67,6 +66,7 @@
 </template>
 
 <script>
+import {getperson} from "api/jsonpdata"
 export default {
   props:['isclose'],
   data() {
@@ -81,6 +81,13 @@ export default {
         info: ["我的消息", "会员中心", "商城"]
       }
     };
+  },
+  created(){
+    getperson().then((res)=>{
+        if(res.code === 0){
+          console.log(res)
+        }
+    })
   },
   computed:{
     flag(){

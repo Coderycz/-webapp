@@ -8,7 +8,7 @@
                 <router-link tag="span" to="/recommend" :class="{active:this.active==2}" @click.native="witch(2)"><i class="iconfont red">&#xe601;</i></router-link>
                 <router-link tag="span" to="/" :class="{active:this.active==3}" @click.native="witch(3)"><i class="iconfont red">&#xe603;</i></router-link>
             </div>
-            <div><span><i class="iconfont red active">&#xe610;</i></span></div>
+            <router-link tag="div" to="/search"><span><i class="iconfont red active">&#xe610;</i></span></router-link>
         </div>
     </div>
     </div>
