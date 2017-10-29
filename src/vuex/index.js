@@ -14,6 +14,11 @@ export default new Vuex.Store({
         dissid: 0,                      /* 歌单id */   
         type : ["icon-suijibofang","icon-liebiaoxunhuan","icon-danquxunhuan"],
         describing: ["随机播放","列表循环","单曲循环"],
+        search: {
+            result: {},
+            hist: []
+        }
+
 
     },
     mutations:{
@@ -44,6 +49,12 @@ export default new Vuex.Store({
         },
         changedissid(state,b){
             state.dissid = b
+        },
+        changesearch(state,b){
+            state.search.result = b
+        },
+        changehist(state,b){
+            state.search.hist = b
         }
 
 

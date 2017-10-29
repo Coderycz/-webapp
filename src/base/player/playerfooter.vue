@@ -61,9 +61,10 @@ export default {
       islike: false,    
       lyric: true,
       dargtime: 0,      //拖拽时长   
-      changetype: false,   
+      changetype: false,  
     };
   },
+  
   created() { 
       audio.addEventListener("canplay",function(){
        this.$store.commit("getsumtime", audio.duration);

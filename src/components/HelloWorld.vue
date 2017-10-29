@@ -25,14 +25,9 @@ export default {
     }
   },
   created(){
-    console.log(this.list,html)
-    this._get()
     
-    getSongList(1183607014).then((res)=>{
-        if(res.code === 0){
-          console.log(res)
-        }
-      }) 
+    this._get()  
+   
   },
   methods:{   
     _get(){
@@ -41,19 +36,8 @@ export default {
           //console.log(res.data)
         }
       })
-    },
-    getsong(num){
-      
-    },
-    /* getc(){
-      getclund().then((res) => {
-        if(res.code === 0){
-          console.log(res.data)
-        }
-      })
-    } */
+    }
   },
-
   components:{
     "my-header": myHeader ,
     myFooter,

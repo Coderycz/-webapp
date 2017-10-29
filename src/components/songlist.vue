@@ -60,20 +60,21 @@
           <span>多选</span>
         </div>
       </div>
+      {{lists}}
 
       <!-- 列表 -->
       <ul>
-        <li v-for="(v,k) in list"  @click="index(k)">
+        <li v-for="(v,k) in lists"  @click="index(k)">
           <div class="index">
             <i class="iconfont icon-shengyin" v-show="(active==k)"></i>
             <span v-show="!(active==k)">{{k+1}}</span>
           </div>
           <div class="songlists">
             <div class="song">
-              <p class="stitle">歌名歌名</p>
+              <p class="stitle">{{v.album.name}}</p>
               <div class="down">
                 <i class="iconfont icon-gou"></i>
-                <p class="singer">演唱者</p>
+                <p class="singer">{{v.auther[0].title}}</p>
               </div>            
             </div>
             <span class="more"><i class="iconfont icon-gengduo"></i></span>
@@ -102,7 +103,28 @@ export default {
   components:{
     myfooter
   },
+  created(){
+    this.getpersonlist()
+  },
+
+  
+  computed:{
+    lists(){
+      return this.getpersonlist()
+    }
+  },
   methods:{
+    getpersonlist(){
+     var url = "https://u.y.qq.com/cgi-bin/musicu.fcg?callback=recom14277918772343812&jsonpCallback=recom14277918772343812&hostUin=0&data=%7B%22comm%22%3A%7B%22ct%22%3A24%7D%2C%22new_album%22%3A%7B%22module%22%3A%22QQMusic.MusichallServer%22%2C%22method%22%3A%22GetNewAlbum%22%2C%22param%22%3A%7B%22type%22%3A1%2C%22category%22%3A%22-1%22%2C%22genre%22%3A0%2C%22year%22%3A1%2C%22company%22%3A-1%2C%22sort%22%3A1%2C%22start%22%3A0%2C%22end%22%3A39%7D%7D%7D"
+    this.$http.jsonp(url,{
+      callback:"recom14277918772343812"
+    }).then(res=>{
+      return res.body.new_album.data.album_list
+      console.log(res.body.new_album.data.album_list)
+    })
+    
+    },
+
     goback() {
       return this.$router.go(-1);
     },

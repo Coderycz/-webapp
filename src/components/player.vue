@@ -31,6 +31,8 @@ export default {
 <style lang="scss" scoped>
 $sc: 25;
 .container {  
+  position: fixed;
+  z-index: 9999999;
   width: 100%;
   height: 100%;
   overflow: hidden;
