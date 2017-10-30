@@ -1,9 +1,7 @@
 <template>
-  <div class="hello">
-    
+  <div class="hello">  
     <my-header></my-header>  
-    <my-body></my-body>
-     
+    <my-body></my-body>    
   </div>
 </template>
 
@@ -20,14 +18,15 @@ export default {
   data () {
     return {     
       createdlist: [],
-      collectlist: '',         
+      collectlist: '',        
     }
   },
   created(){
-    
     this._get()
     this.getpersonlist()  
-   
+  },
+  computed:{
+    
   },
   methods:{   
     _get(){
@@ -44,10 +43,8 @@ export default {
     }).then(res=>{
       console.log(res.body.new_album.data.album_list)
       var arr = res.body.new_album.data.album_list
-
       this.$store.commit('changesonglist',res.body.new_album.data.album_list)     
-      /* res.body.new_album.data.album_list .album.title*/
-      
+      /* res.body.new_album.data.album_list .album.title*/    
     })
     }
 
@@ -70,6 +67,6 @@ $sc :25;
  width: 100%;
  height: 100%;
  overflow: auto;
-  background: #f7f7f7;
+ background: #f7f7f7;
 }
 </style>

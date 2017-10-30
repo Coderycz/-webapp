@@ -144,10 +144,12 @@ export default {
       return this.$router.go(-1);
     },
     index(k,v){           /* 将点击的歌曲传入仓库 */
+      //var imgindex =  Math.round(Math.random()*this.$store.state.resl.length)
       this.$store.commit('changenowplaysongname',v.album.name) 
       this.$store.commit('changenowplaysinger',v.author[0].title) 
       this.$store.commit('changenowplayid',v.album.mid) 
       this.$store.commit('changenowplaykey',k) 
+      //this.$store.commit('changenowplayimg',this.$store.state.resl[imgindex])
       if(this.key == k){
         //return this.$router.go('/songlist');
         window.location.href= "http://localhost:8088/#/player"      

@@ -3,7 +3,7 @@
         <div class="container">
           <router-link tag="div" to="/player" class="y-footer">
             <div class="leftinfo">
-                <img :src="this.$store.state.songlistheader.cover" alt="">
+                <img :src="this.$store.state.nowplay.img" alt="">
                 <div class="songname">
                     <p class="name">{{nowplay.name}}</p>
                     <p class="singer">{{nowplay.singer}}</p>

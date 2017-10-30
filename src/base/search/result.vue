@@ -268,7 +268,7 @@ $sc:25;
       overflow:hidden;
     }
     i {
-      @include i(50/$sc+rem);
+      @include i(40/$sc+rem);
       font-size: 16/$sc+rem;
     }
   }

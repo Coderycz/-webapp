@@ -24,12 +24,13 @@ export default new Vuex.Store({
         },              /* 选择了哪一个歌单 */
         songlist:{},                    /* 正在播放的歌单 */
         nowplay:{                       /* 正在播放歌曲信息 */
-            name: '小酒窝',
-            singer: '林俊杰',
-            img: '',
+            name: '火星研究院',
+            singer: '汪苏泷',
+            img: 'http://p.qpic.cn/music_cover/6XFhg7ldObzBw37HAkL9Lqz6icmvuH4I2bbg1fTQHVUOQFEK0bT8bgA/600?n=1',
             id: 0,
             key: 0
-        }
+        },
+        resl:[]                 /* 图片 */
 
 
 
@@ -85,14 +86,19 @@ export default new Vuex.Store({
         changenowplaykey(state,b){
             state.nowplay.key = b
         },
+        changenowplayimg(state,b){
+            state.nowplay.img = b
+        },
         /* 正在播放歌单 */
         nowplaylistcover(state,b){
             state.songlistheader.cover = b
         },
         nowplaylisttitle(state,b){
-            state.songlistheader.title = b
-            
+            state.songlistheader.title = b           
         },
+        changeimg(state,b){              /* 图片集合 */
+            state.resl.push(b)
+        }
 
 
 

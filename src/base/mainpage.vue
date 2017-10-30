@@ -82,7 +82,12 @@ export default {
             callback: "recom17361411500470214"//callback=recom17361411500470214
           }).then(res=>{
              this.resl = res.body.recomPlaylist.data.v_hot
-             console.log(this.resl)
+             for(let i = 0;i<this.resl.length;i++){
+                 /* 存入图片，歌曲切换用 */
+                this.$store.commit('changeimg',this.resl[i].cover)     
+             }
+            
+             
           })
     },
   },

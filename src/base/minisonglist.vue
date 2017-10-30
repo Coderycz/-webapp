@@ -79,11 +79,14 @@ export default {
     close(){     
       this.$store.commit("changemini")
     } ,
-    index(k,v){     
+    index(k,v){    
+        var imgindex =  Math.round(Math.random()*this.$store.state.resl.length)
+
       this.$store.commit('changenowplaysongname',v.album.name) 
       this.$store.commit('changenowplaysinger',v.author[0].title) 
       this.$store.commit('changenowplayid',v.album.mid) 
       this.$store.commit('changenowplaykey',k) 
+      this.$store.commit('changenowplayimg',this.$store.state.resl[imgindex])
     }
   }
 };
@@ -128,22 +131,25 @@ $sc: 25;
     display: flex;
     justify-content: space-between;
 }
+i{
+    font-size: 16/$sc+rem;
+}
 .title{
     @extend .flex;
-    height: 50px;
+    height: 50/$sc+rem;
     width: 100%;
     color: #2c3e50;
-    padding: 0 15px;
-    font-size: 14px;
-    border-bottom: 1px solid rgba(7,17,27,.1);
+    padding: 0 15/$sc+rem;
+    font-size: 14/$sc+rem;
+    border-bottom: 1/$sc+rem solid rgba(7,17,27,.1);
     .palytype{
-        line-height: 50px;
+        line-height: 50/$sc+rem;
     }
     .right{
         @extend .flex;
-        line-height: 50px;
+        line-height: 50/$sc+rem;
         div{
-            margin-left: 30px;
+            margin-left: 30/$sc+rem;
         }
     }
 
@@ -152,28 +158,28 @@ $sc: 25;
 
 .songlist{
     //@extend .flex;
-    padding: 0 15px;
+    padding: 0 15/$sc+rem;
     color: #2c3e50;
     li{
-        height: 42px;
+        height: 42/$sc+rem;
         width: 100%;
         @extend .flex;
         flex-wrap: wrap;
         align-items: center;
-        border-bottom: 1px solid rgba(7,17,27,.1);
+        border-bottom: 1/$sc+rem solid rgba(7,17,27,.1);
         div{
-            height: 42px;
-        line-height: 42px;
+            height: 42/$sc+rem;
+        line-height: 42/$sc+rem;
         }
         .red{
-            font-size: 14px;
+            font-size: 14/$sc+rem;
             color: red;
         }
         .songname{
-            font-size: 14px
+            font-size: 14/$sc+rem
         }
         .singer{
-            font-size: 12px;
+            font-size: 12/$sc+rem;
             color: #999;
         }
     }

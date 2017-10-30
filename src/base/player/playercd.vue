@@ -6,14 +6,13 @@
         </div>
         
         <div style="backgroundImage: url(../assets/images/cd-mine.png)" class="cdpic" :class="{'test1':isplay}">
-            <img :src="this.$store.state.songlistheader.cover"/>
+            <img :src="this.$store.state.nowplay.img"/>
         </div>
         <div class="like-container">
             <div class="like">
                 <i class="iconfont" @click.stop="changelike" :class="{'icon-like':islike,'icon-xihuan':!islike,'red':!islike}"></i>
             <i class="iconfont icon-xiazai" @click.stop=""></i>
-            <span class="pinlun" @click.stop=""><i class="iconfont icon-xinxi"></i><span class="num">999+</span></span>
-            
+            <span class="pinlun" @click.stop=""><i class="iconfont icon-xinxi"></i><span class="num">999+</span></span>            
             <i  class="iconfont icon-gengduo" @click.stop=""></i>
             </div>     
         </div>
@@ -131,7 +130,7 @@ $sc: 25;
   // background: #fff
  height: 50px;
  line-height: 50px;
-  color: #aaa;
+  color: #eee;
   display: flex;
   width: 100%;
   justify-content: space-around;

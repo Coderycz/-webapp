@@ -35,9 +35,9 @@
   <div class="describing" v-show="changetype">{{describing[typenum]}}</div>
   <div class="control" >   
       <i class="iconfont " :class="playtype1[typenum]" @touchstart="playtype"></i>
-      <i class="iconfont icon-shangyiqu101" @touchend = "prev"></i>
+      <i class="iconfont icon-shangyiqu101" @touchend = "target('prev')"></i>
       <i class="iconfont " :class="isplayicon" @click="play"></i>
-      <i class="iconfont icon-xiayiqu101" @touchend = "next"></i>
+      <i class="iconfont icon-xiayiqu101" @touchend = "target"></i>
       <i class="iconfont icon-caidan" @touchstart="showmini"></i>     
   </div>
   </div>
@@ -128,10 +128,13 @@ export default {
 
     /* 已播放时长 */
     gettime() {
+      if(audio.currentTime == audio.duration){
+        this.target()
+      }
       this.timeed = audio.currentTime;
       if(istouch){
         return
-      }  
+      } 
       if(this.$refs.valued && this.$refs.cricle)  {
         this.$refs.valued.style.width = this.percent *this.$refs.pragress.offsetWidth+"px"
         this.$refs.cricle.style.left = this.percent *(this.$refs.pragress.offsetWidth-this.$refs.cricle.offsetWidth)+"px"
@@ -148,10 +151,35 @@ export default {
       }
       this.$store.commit("changeplay");
     },
-    prev(){
-      var list = this.$store.state.songlist
+    
+    target(p){  /* 切换歌曲上一曲下一曲 */
+      console.log(p)
+      audio.currentTime = 0;
+      
+      var type = this.typenum
+      var num = 0       /* 单曲 */
+      if(type==1){      /* 列表循环 */
+        if (p == "prev"){/* 上一曲 */
+          num = -1
+        }else{
+          num = 1       /* 下一曲 */
+        }   
+      }else if(type==0){    /* 随机播放 */
+        num = Math.round(Math.random()*this.songlist.length)
+      }
+      //var imgindex = Math.round(Math.random()*this.$store.state.resl.length)
+      var nextsong = this.index+num>this.songlist.length-1 ? this.index+num-this.songlist.length :
+                     this.index+num < 0 ? this.index+num+this.songlist.length : this.index+num
+      var songinfo = this.songlist[nextsong] 
+      var imgindex = nextsong%this.$store.state.resl.length     
+      this.$store.commit('changenowplaysongname',songinfo.album.name) 
+      this.$store.commit('changenowplaysinger',songinfo.author[0].title) 
+      this.$store.commit('changenowplayid',songinfo.album.mid) 
+      this.$store.commit('changenowplaykey',nextsong)
+      this.$store.commit('changenowplayimg',this.$store.state.resl[imgindex])
+      console.log(imgindex,this.$store.state.resl[imgindex]) 
+      audio.play()    
     },
-    next(){},
     playtype(){
       this.changetype = true;
       setInterval(function(){
@@ -170,7 +198,7 @@ export default {
     showmini(){
       console.log("sdf")
       this.$store.commit("changemini");
-    }
+    },
   },
   watch: {
     timeed(n) {
@@ -179,7 +207,13 @@ export default {
     sumtime(){
     }
   },
-  computed: {
+  computed: {    
+    songlist(){            /* 歌曲列表 */
+       return this.$store.state.songlist
+    },   
+    index(){                /* 正在播放歌曲的索引值 */
+      return this.$store.state.nowplay.key
+    },
     typenum(){
       return this.$store.state.typenum
     },
@@ -274,7 +308,7 @@ $sc: 25;
     i {
       flex: 1;
       height: 50/$sc+rem;
-      color: #aaa;
+      color: #ddd;
       font-size: 28/$sc+rem;
       &:nth-child(1) {
         font-size: 20/$sc+rem;
@@ -295,11 +329,12 @@ $sc: 25;
   height: 40/$sc+rem;
   margin: 0 auto;
   width: 90%;
-  color: #aaa;
+  color: #ddd;
   span {
     width: 30/$sc+rem;
     height: 14/$sc+rem;
     line-height: 14/$sc+rem;
+    font-size: 14/$sc+rem;
     text-align: center;
   }
 }

@@ -19,12 +19,12 @@ import playerfooter from "@/base/player/playerfooter";
 export default {
   data() {
     return {
-      bg: "http://oiq8j9er1.bkt.clouddn.com/music_qingnianwanbao.jpg"
+      //bg: "http://oiq8j9er1.bkt.clouddn.com/music_qingnianwanbao.jpg"
     };
   },
   computed:{
     srcimg(){
-      return this.$store.state.songlistheader.cover
+      return this.$store.state.nowplay.img
     }
   },
   components: {  
