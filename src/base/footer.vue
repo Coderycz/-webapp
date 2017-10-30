@@ -3,10 +3,10 @@
         <div class="container">
           <router-link tag="div" to="/player" class="y-footer">
             <div class="leftinfo">
-                <img src="" alt="">
+                <img :src="this.$store.state.songlistheader.cover" alt="">
                 <div class="songname">
-                    <p class="name">小酒窝</p>
-                    <p class="singer">林俊杰,蔡卓妍</p>
+                    <p class="name">{{nowplay.name}}</p>
+                    <p class="singer">{{nowplay.singer}}</p>
                 </div>
             </div>
             <div class="rightmenu">               
@@ -28,6 +28,9 @@ export default {
   },
   components: {},
   computed:{
+    nowplay(){
+      return this.$store.state.nowplay
+    },
     isPlaying(){
       return this.$store.state.isplay
     },

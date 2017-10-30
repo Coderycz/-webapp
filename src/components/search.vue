@@ -1,4 +1,5 @@
 <template>
+ <transition name="container"  transition-mode="out-in">
     <div class="container">
         <!-- 头 -->
         <div class="headsearch">
@@ -45,7 +46,7 @@
         </div>
 
     </div>
-  
+ </transition>
 </template>
 
 <script>
@@ -60,7 +61,7 @@ export default {
         singername:[],   /* 歌手名 */
         special:[]
     },
-      hist: ["promise", "化身孤岛的鲸", "李香兰", "陈奕迅", "看穿"],/* 搜索历史 */
+     // hist: ["promise", "化身孤岛的鲸", "李香兰", "陈奕迅", "看穿"],/* 搜索历史 */
       list: []          /* 热门搜索 */
     };
   },
@@ -168,6 +169,16 @@ export default {
 
 <style lang="scss" scoped>
 $sc:25;
+
+.container-enter-to,.container-leave-to{
+  transition: all 0.3s
+}			
+		.container-enter{
+			transform: translate3d(0,10%,0);
+			opacity: 0.5}
+		.container-leave-to{
+			transform: translate3d(100%,0%,0);
+			opacity: 0}
 .flex {
   display: flex;
   justify-content: space-between;

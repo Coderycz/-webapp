@@ -7,7 +7,7 @@
             <div class="palytype" @touchstart="playtype">
                 <i class="iconfont icon-liebiaoxunhuan" :class="playtype1[typenum]" ></i>
                 <span class="typename">{{describing[typenum]}}</span>
-                <span>(1)</span>
+                <span>({{minilist.length}})</span>
             </div>
             <div class="right">
                 <div>
@@ -23,11 +23,11 @@
 
        
             <ul class="songlist">
-                <li>
+                <li v-for="(v,k) in minilist" @click="index(k,v)">
                     <div>
-                        <i class="iconfont icon-shengyin red"></i>
-                        <span class="songname">歌名</span> - 
-                        <span class="singer">歌手</span>
+                        <i class="iconfont icon-shengyin red"  v-show="key == k"></i>
+                        <span class="songname">{{v.album.name}}</span> - 
+                        <span class="singer">{{v.author[0].title}}</span>
                     </div>                    
                     <i class="iconfont icon-chuyidong"></i>
                 </li>
@@ -45,7 +45,16 @@ export default {
      
     };
   },
+  created(){
+      console.log()
+  },
   computed:{
+      key(){
+          return this.$store.state.nowplay.key
+      },
+      minilist(){
+          return this.$store.state.songlist
+      },
       typenum(){
       return this.$store.state.typenum
     },
@@ -69,7 +78,13 @@ export default {
     },
     close(){     
       this.$store.commit("changemini")
-    } 
+    } ,
+    index(k,v){     
+      this.$store.commit('changenowplaysongname',v.album.name) 
+      this.$store.commit('changenowplaysinger',v.author[0].title) 
+      this.$store.commit('changenowplayid',v.album.mid) 
+      this.$store.commit('changenowplaykey',k) 
+    }
   }
 };
 </script>
@@ -88,7 +103,7 @@ $sc: 25;
 }
 .coverhid{
   opacity: 1;
-  z-index: 999;
+  z-index: 9998;
 }
 
 /* 下面mini歌单 */
@@ -136,13 +151,14 @@ $sc: 25;
 }
 
 .songlist{
-    @extend .flex;
+    //@extend .flex;
     padding: 0 15px;
     color: #2c3e50;
     li{
         height: 42px;
         width: 100%;
         @extend .flex;
+        flex-wrap: wrap;
         align-items: center;
         border-bottom: 1px solid rgba(7,17,27,.1);
         div{

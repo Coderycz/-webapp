@@ -1,15 +1,13 @@
 <template>
-  <div id="app">
-    
+  <div id="app"> 
     <sidebar></sidebar> 
-    <transition name="flod" mode="out-in">
+    <keep-alive>
       <router-view/>
-    </transition> 
-    <my-footer></my-footer>
+    </keep-alive>
     <minilist></minilist>
+    <my-footer></my-footer>    
   </div>
 </template>
-
 <script>
 import "common/style/reset.css";
 import "common/style/layout.css";

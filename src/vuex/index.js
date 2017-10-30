@@ -15,9 +15,22 @@ export default new Vuex.Store({
         type : ["icon-suijibofang","icon-liebiaoxunhuan","icon-danquxunhuan"],
         describing: ["随机播放","列表循环","单曲循环"],
         search: {
-            result: {},
+            result: {},                 /* 搜索结果 */
             hist: []
+        },  
+        songlistheader:{
+            cover: 'http://p.qpic.cn/music_cover/6XFhg7ldObzBw37HAkL9Lqz6icmvuH4I2bbg1fTQHVUOQFEK0bT8bgA/600?n=1',
+            title: '东京街头霓虹灯下罐装啤酒少女'
+        },              /* 选择了哪一个歌单 */
+        songlist:{},                    /* 正在播放的歌单 */
+        nowplay:{                       /* 正在播放歌曲信息 */
+            name: '小酒窝',
+            singer: '林俊杰',
+            img: '',
+            id: 0,
+            key: 0
         }
+
 
 
     },
@@ -55,7 +68,32 @@ export default new Vuex.Store({
         },
         changehist(state,b){
             state.search.hist = b
-        }
+        },
+        changesonglist(state,b){
+            state.songlist = b
+        },
+        /* 正在播放音乐名 */
+        changenowplaysongname(state,b){
+            state.nowplay.name = b
+        },
+        changenowplaysinger(state,b){
+            state.nowplay.singer = b
+        },
+        changenowplayid(state,b){
+            state.nowplay.id = b
+        },
+        changenowplaykey(state,b){
+            state.nowplay.key = b
+        },
+        /* 正在播放歌单 */
+        nowplaylistcover(state,b){
+            state.songlistheader.cover = b
+        },
+        nowplaylisttitle(state,b){
+            state.songlistheader.title = b
+            
+        },
+
 
 
     }

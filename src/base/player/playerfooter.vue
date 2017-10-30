@@ -2,12 +2,11 @@
 
 <div class="headfoot">
     <!-- 头部 -->
-   
     <div class="y-header">
         <span @click="goback"><i class="iconfont icon-zuo"></i></span>
         <div>
-            <p class="title">化身孤岛的鲸</p>
-            <p class="singer">不才</p>
+            <p class="title">{{this.$store.state.nowplay.name}}</p>
+            <p class="singer">{{this.$store.state.nowplay.singer}}</p>
         </div>
         <span><i class="iconfont icon-fenxiang"></i></span>
     </div>   
@@ -36,9 +35,9 @@
   <div class="describing" v-show="changetype">{{describing[typenum]}}</div>
   <div class="control" >   
       <i class="iconfont " :class="playtype1[typenum]" @touchstart="playtype"></i>
-      <i class="iconfont icon-shangyiqu101"></i>
+      <i class="iconfont icon-shangyiqu101" @touchend = "prev"></i>
       <i class="iconfont " :class="isplayicon" @click="play"></i>
-      <i class="iconfont icon-xiayiqu101"></i>
+      <i class="iconfont icon-xiayiqu101" @touchend = "next"></i>
       <i class="iconfont icon-caidan" @touchstart="showmini"></i>     
   </div>
   </div>
@@ -66,11 +65,11 @@ export default {
   },
   
   created() { 
-      audio.addEventListener("canplay",function(){
-       this.$store.commit("getsumtime", audio.duration);
+    this.$store.commit("getsumtime", audio.duration);
+    audio.addEventListener("canplay",function(){
+        this.$store.commit("getsumtime", audio.duration);
     }.bind(this)) 
-    this.$store.commit("changetime", audio.currentTime);
-    
+    this.$store.commit("changetime", audio.currentTime);    
     timer = setInterval(this.gettime, 300);
     //console.log(this.sumtime,audio.duration)
   },
@@ -110,8 +109,6 @@ export default {
         length = length > 1 ? 1 : length
         length = length < 0 ? 0 : length
         this.dragtime = length
-
-        
         //移动时改变已播放 进度条 和 滑点 位置
         this.$refs.valued.style.width = length *pragresswidth+"px"
         this.$refs.cricle.style.left = length *(pragresswidth-this.$refs.cricle.offsetWidth)+"px"    
@@ -151,6 +148,10 @@ export default {
       }
       this.$store.commit("changeplay");
     },
+    prev(){
+      var list = this.$store.state.songlist
+    },
+    next(){},
     playtype(){
       this.changetype = true;
       setInterval(function(){

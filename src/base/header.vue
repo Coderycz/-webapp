@@ -60,6 +60,7 @@ export default {
   background: #c62f2f;
   display: flex;
   justify-content: space-between;
+  
 }
 span {
   display: inline-block;
@@ -69,7 +70,7 @@ span {
   line-height: 2rem;
   i {
     font-size: 0.8rem !important;
-    color: #aaa;
+    color: #bbb;
   }
 }
 .active  i{

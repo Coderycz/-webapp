@@ -1,26 +1,27 @@
 <template>
-  <transition name="container">
+  <transition name="container"  @scroll="scrollEvent">
     <div class="container">
       <!-- header -->
-      <div class="cover"></div>
-      <div class="header">
+      <div class="cover" ref="songsheet" :style="{backgroundImage:'url('+cover+')'}"></div>
+      <div class="header" ref="songheader">
           <div class="left">
               <router-link tag="i" to="/" class="iconfont icon-zuo" ></router-link>
               <p>歌单</p>
           </div>
           <div class="right">
-              <i class="iconfont icon-tubiao17"></i>
+              <router-link tag="i" to="/search" class="iconfont icon-tubiao17" ></router-link>            
               <i class="iconfont icon-gengduo"></i>
           </div>
       </div>
         <!-- img -->
-      <div class="img">
+      <div class="img" ref="top" :style="{backgroundImage:'url('+cover+')'}">
+        <!-- background-image: url('http://p.qq181.com/cms/1210/2012100413195471481.jpg'); :style="{'background-image'}" -->
           <div class="songpic">
-            <img class="songimg"/>
+            <img :src="cover" class="songimg"/>
             <div class="info">
-              <p class="title">抖腿向</p>
+              <p class="title">{{title}}</p>
               <div class="person">
-                <img class="personimg" src="" alt="" />
+                <img class="personimg" src="http://p.qq181.com/cms/1210/2012100413195471481.jpg" alt="" />
                 <span>碎梦无痕</span>
                 <i class="iconfont icon-xiala"></i>
               </div>
@@ -48,11 +49,11 @@
       </div>
 
       <!-- 播放全部 -->
-      <div class="play">
+      <div class="play"  @scroll="">
         <div class="left">
           <i class=" iconfont icon-bofang"></i>
           <span class="main">全部播放</span>
-          <span class="gray">(共30首)</span>
+          <span class="gray">(共{{lists.length}}首)</span>
         </div>
 
         <div class="right">
@@ -60,21 +61,20 @@
           <span>多选</span>
         </div>
       </div>
-      {{lists}}
 
       <!-- 列表 -->
       <ul>
-        <li v-for="(v,k) in lists"  @click="index(k)">
+        <li v-for="(v,k) in lists"  @click="index(k,v)">
           <div class="index">
-            <i class="iconfont icon-shengyin" v-show="(active==k)"></i>
-            <span v-show="!(active==k)">{{k+1}}</span>
+            <i class="iconfont icon-shengyin" v-show="(key==k)"></i>
+            <span v-show="!(key==k)">{{k+1}}</span>
           </div>
           <div class="songlists">
             <div class="song">
               <p class="stitle">{{v.album.name}}</p>
               <div class="down">
                 <i class="iconfont icon-gou"></i>
-                <p class="singer">{{v.auther[0].title}}</p>
+                <p class="singer">{{v.author[0].title}}</p>
               </div>            
             </div>
             <span class="more"><i class="iconfont icon-gengduo"></i></span>
@@ -104,39 +104,54 @@ export default {
     myfooter
   },
   created(){
-    this.getpersonlist()
-  },
-
-  
+    //this.getpersonlist()
+  },  
   computed:{
-    lists(){
-      return this.getpersonlist()
+    key(){
+          return this.$store.state.nowplay.key
+      },
+    cover(){
+      return this.$store.state.songlistheader.cover
+    },
+    title(){
+      return this.$store.state.songlistheader.title
+    },
+    lists(){      
+      return this.$store.state.songlist
     }
   },
   methods:{
-    getpersonlist(){
-     var url = "https://u.y.qq.com/cgi-bin/musicu.fcg?callback=recom14277918772343812&jsonpCallback=recom14277918772343812&hostUin=0&data=%7B%22comm%22%3A%7B%22ct%22%3A24%7D%2C%22new_album%22%3A%7B%22module%22%3A%22QQMusic.MusichallServer%22%2C%22method%22%3A%22GetNewAlbum%22%2C%22param%22%3A%7B%22type%22%3A1%2C%22category%22%3A%22-1%22%2C%22genre%22%3A0%2C%22year%22%3A1%2C%22company%22%3A-1%2C%22sort%22%3A1%2C%22start%22%3A0%2C%22end%22%3A39%7D%7D%7D"
-    this.$http.jsonp(url,{
-      callback:"recom14277918772343812"
-    }).then(res=>{
-      return res.body.new_album.data.album_list
-      console.log(res.body.new_album.data.album_list)
-    })
-    
+    scrollEvent(){
+      console.log('sdfsd')
     },
+    /* scrollEvent () {
+      console.log(this.$refs.songsheet.scrollTop,this.$refs.top.offsetHeight)
+				// alert(this.$refs.songsheet.scrollTop)
+				let opacity = this.$refs.songsheet.scrollTop / (this.$refs.top.offsetHeight - this.$refs.songheader.offsetHeight)
+				if (this.$refs.songsheet.scrollTop < this.$refs.top.offsetHeight - this.$refs.songheader.offsetHeight) {
+					this.$refs.songheader.style.opacity = opacity
+					this.$refs.songheader.style.filter = `alpha(opacity:${opacity * 100})`
+				} else {
+					this.$refs.songheader.style.opacity = 1
+					this.$refs.songheader.style.filter = `alpha(opacity:${100})`
+				}
+			}, */
+    
+    
+
 
     goback() {
       return this.$router.go(-1);
     },
-    index(b){
-      console.log("sdf")
-      console.log(this.active,b)      
-      if(this.active == b){
-
+    index(k,v){           /* 将点击的歌曲传入仓库 */
+      this.$store.commit('changenowplaysongname',v.album.name) 
+      this.$store.commit('changenowplaysinger',v.author[0].title) 
+      this.$store.commit('changenowplayid',v.album.mid) 
+      this.$store.commit('changenowplaykey',k) 
+      if(this.key == k){
         //return this.$router.go('/songlist');
         window.location.href= "http://localhost:8088/#/player"      
       }
-      this.active = b
     }
   }
 };
@@ -158,8 +173,7 @@ $s : 25;
 
 .container-enter-to,.container-leave-to{
   transition: all 0.3s
-}
-			
+}			
 		.container-enter{
 			transform:translate3d(0,100%,0);
 			opacity: 0}
@@ -182,7 +196,10 @@ $s : 25;
   position: fixed;
   top: 0;
   z-index: 10;
-  background: rgba(0,0,0,.5)
+  background-size: 5800%;
+  background-position: center center;
+
+  
 }
 .header {
   position: fixed;
@@ -212,10 +229,15 @@ $s : 25;
   color: #ddd;
   width: 100%;
     height: 245/$s+rem;
-    background: green;
+    
+    background-size: 5800%;
+    background-position: center center;
+
+   // background: rgba(0,0,0,.3);
     padding: 70/$s+rem 25/$s+rem 20/$s+rem;
     @extend .flex;
     flex-direction: column;
+    color: #fff;
     .songpic{
       width: 100%;
       height: 100/$s+rem;

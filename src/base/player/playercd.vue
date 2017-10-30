@@ -1,12 +1,12 @@
 <template>
     <div class="cd" >
         <div class="line">
-            <div style="'background-image': 'url(../../assets/images/swith.png)'" class="pointer " :class="{'pause':!isplay}">
+            <div style="'backgroundImage': 'url(../../assets/images/swith.png)'" class="pointer " :class="{'pause':!isplay}">
             </div>
         </div>
         
-        <div style="background-image: url(../../assets/images/cd-mine.png)" class="cdpic" :class="{'test1':isplay}">
-            <img src="http://oiq8j9er1.bkt.clouddn.com/music_qingnianwanbao.jpg"/>
+        <div style="backgroundImage: url(../assets/images/cd-mine.png)" class="cdpic" :class="{'test1':isplay}">
+            <img :src="this.$store.state.songlistheader.cover"/>
         </div>
         <div class="like-container">
             <div class="like">

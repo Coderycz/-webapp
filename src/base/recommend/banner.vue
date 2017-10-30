@@ -1,12 +1,11 @@
 <template>
-   <swiper  :options="swiperOption" ref="mySwiper" class="hid">
+   <swiper :options="swiperOption" ref="mySwiper" class="hid">
     <!-- slides -->
     <swiper-slide class="red" v-for="(v,k) in list"><a :href="list[k].linkUrl"><img  :src="list[k].picUrl"></a></swiper-slide>    
     <!-- Optional controls -->
     <div class="swiper-pagination"  slot="pagination"></div>
   </swiper>
 </template>
-
 <script>
 
 require("swiper/dist/css/swiper.css");

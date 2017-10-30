@@ -4,7 +4,7 @@
     <div class="cover" @click="close" :class="{'coverhid':!flag}"></div>
     <div class="bar " :class="{'close':flag}">
             <div class="bg">            
-               <img src="http://oiq8j9er1.bkt.clouddn.com/music_%E7%8A%AC%E5%A4%9C%E5%8F%89.jpg"/>
+               <img src="http://p.qq181.com/cms/1210/2012100413195471481.jpg"/>
                 <div class="information">
                     <div class="info">
                          <span class="name">碎梦无痕</span>
@@ -13,8 +13,7 @@
                     <div class="sign"><span><i class="icon iconfont icon-iconfontcoin"></i></span>签到</div>
                 </div>
             </div>
-        <div class="uls">
-          {{isclose}}
+        <div class="uls">       
         <ul >
             <li v-for="(v,k) in uls1.info">
                 <span class="icon"><i class="iconfont "  :class="uls1.icon[k]"></i></span>
