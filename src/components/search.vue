@@ -25,7 +25,7 @@
         <div class="bottom" @touchend="hidd=true">
         <div class="hot">
             <div class="">热门搜索</div>
-            <ul >            
+            <ul>            
                 <li class="" v-for="(v,k) in list" @click="choose(list[k].k)"><p ref="innerhtml">{{list[k].k}}</p></li>
             </ul>
         </div>
@@ -59,7 +59,7 @@ export default {
       showsearch: {
         songname:[],    /* 歌名 */
         singername:[],   /* 歌手名 */
-        special:[]
+        special:[]        /* 专辑 */
     },
      // hist: ["promise", "化身孤岛的鲸", "李香兰", "陈奕迅", "看穿"],/* 搜索历史 */
       list: []          /* 热门搜索 */
@@ -93,7 +93,6 @@ export default {
       this.hist = this.hist.splice(0,5)
       this.$store.commit("changesearch",this.showsearch)
       this.$store.commit("changehist",this.hist)
-      
     },
 
     choose(k,b) {
@@ -132,8 +131,7 @@ export default {
             || songinfo[i].singer[0].name.indexOf('&')>= 0
             || songinfo[i].albumname.indexOf('&')>= 0) {
               return
-            } 
-                  
+            }                  
             this.showsearch.songname.push(songinfo[i].songname)
             this.showsearch.singername.push(songinfo[i].singer[0].name)
             this.showsearch.special.push(songinfo[i].albumname)

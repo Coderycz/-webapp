@@ -23,7 +23,6 @@ export default {
   },
   created(){
     this._get()
-    this.getpersonlist()  
   },
   computed:{
     
@@ -36,18 +35,6 @@ export default {
         }
       })
     },
-    getpersonlist(){
-     var url = "https://u.y.qq.com/cgi-bin/musicu.fcg?callback=recom14277918772343812&jsonpCallback=recom14277918772343812&hostUin=0&data=%7B%22comm%22%3A%7B%22ct%22%3A24%7D%2C%22new_album%22%3A%7B%22module%22%3A%22QQMusic.MusichallServer%22%2C%22method%22%3A%22GetNewAlbum%22%2C%22param%22%3A%7B%22type%22%3A1%2C%22category%22%3A%22-1%22%2C%22genre%22%3A0%2C%22year%22%3A1%2C%22company%22%3A-1%2C%22sort%22%3A1%2C%22start%22%3A0%2C%22end%22%3A39%7D%7D%7D"
-    this.$http.jsonp(url,{
-      callback:"recom14277918772343812"
-    }).then(res=>{
-      console.log(res.body.new_album.data.album_list)
-      var arr = res.body.new_album.data.album_list
-      this.$store.commit('changesonglist',res.body.new_album.data.album_list)     
-      /* res.body.new_album.data.album_list .album.title*/    
-    })
-    }
-
   },
   components:{
     "my-header": myHeader ,

@@ -1,6 +1,6 @@
 <template>
-  <div class="sidebar">
-    
+<!-- 下面mini菜单 -->
+  <div class="sidebar">   
     <div class="cover" @click="close" :class="{'coverhid':!flag}"></div>
     <div class="bar " :class="{'close':flag}">
         <div class="title">
@@ -38,6 +38,8 @@
 </template>
 
 <script>
+
+var audio = document.querySelector("audio");
 export default {
   props:['isclose'],
   data() {
@@ -87,6 +89,8 @@ export default {
       this.$store.commit('changenowplayid',v.album.mid) 
       this.$store.commit('changenowplaykey',k) 
       this.$store.commit('changenowplayimg',this.$store.state.resl[imgindex])
+      audio.currentTime = 0;
+      audio.play() 
     }
   }
 };

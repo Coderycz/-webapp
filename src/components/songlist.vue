@@ -85,13 +85,12 @@
       <!-- mini播放器 -->
       <myfooter></myfooter>
       </div>
-  </transition>
-
-  
+  </transition> 
 </template>
 
 <script>
 import myfooter from "@/base/footer"
+var audio = document.querySelector('audio')
 export default {
   data(){
     return{
@@ -144,16 +143,20 @@ export default {
       return this.$router.go(-1);
     },
     index(k,v){           /* 将点击的歌曲传入仓库 */
-      //var imgindex =  Math.round(Math.random()*this.$store.state.resl.length)
+      if(this.key == k){      
+        return this.$router.push('/player')          
+      }
+      var imgindex =  Math.round(Math.random()*this.$store.state.resl.length)
       this.$store.commit('changenowplaysongname',v.album.name) 
       this.$store.commit('changenowplaysinger',v.author[0].title) 
       this.$store.commit('changenowplayid',v.album.mid) 
       this.$store.commit('changenowplaykey',k) 
-      //this.$store.commit('changenowplayimg',this.$store.state.resl[imgindex])
-      if(this.key == k){
-        //return this.$router.go('/songlist');
-        window.location.href= "http://localhost:8088/#/player"      
-      }
+      console.log(imgindex,this.$store.state.resl[imgindex])
+      this.$store.commit('changenowplayimg',this.$store.state.resl[imgindex])
+      audio.currentTime = 0;
+      audio.play() 
+      
+      
     }
   }
 };
@@ -176,15 +179,17 @@ $s : 25;
 .container-enter-to,.container-leave-to{
   transition: all 0.3s
 }			
-		.container-enter{
+.container-enter{
+      
 			transform:translate3d(0,100%,0);
 			opacity: 0}
-		.container-leave-to{
+.container-leave-to{
 			transform:translate3d(100%,0,0);
-			opacity: 0}
+			opacity: 0} 
 
 
 .container {
+  position: absolute;
   width: 100%;
   height: 100%;
   overflow-y: auto;

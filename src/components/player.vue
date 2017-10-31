@@ -1,12 +1,13 @@
 <template>
 <transition name="container"  transition-mode="out-in">
-
+<div class="tran">
 <div class="container" >
      <div class="bg" >
         <img :src="srcimg"/> 
     </div> 
     <playerfooter></playerfooter>  
-</div>  
+</div> 
+</div> 
 </transition>
   
 </template>
@@ -45,6 +46,12 @@ $sc: 25;
 		.container-leave-to{
 			transform: scale(1.1);
 			opacity: 0}
+
+.tran{
+  position: absolute;
+  width: 100%;
+  height: 100%
+}      
 .container {  
   position: fixed;
   z-index: 9997;

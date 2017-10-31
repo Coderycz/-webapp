@@ -17,7 +17,8 @@ export default new Vuex.Store({
         search: {
             result: {},                 /* 搜索结果 */
             hist: []
-        },  
+        }, 
+        initlist:{}, 
         songlistheader:{
             cover: 'http://p.qpic.cn/music_cover/6XFhg7ldObzBw37HAkL9Lqz6icmvuH4I2bbg1fTQHVUOQFEK0bT8bgA/600?n=1',
             title: '东京街头霓虹灯下罐装啤酒少女'
@@ -72,6 +73,10 @@ export default new Vuex.Store({
         },
         changesonglist(state,b){
             state.songlist = b
+        },
+
+        initsonglist(state,b){
+            state.initlist = b
         },
         /* 正在播放音乐名 */
         changenowplaysongname(state,b){

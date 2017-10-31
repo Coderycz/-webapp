@@ -38,6 +38,9 @@ export default {
         lists: ["sdfsdf","sdfsdfsdfsdfsd"],
     };
   }, 
+  created(){
+    console.log(this.res)
+  },
   computed:{
     
   },

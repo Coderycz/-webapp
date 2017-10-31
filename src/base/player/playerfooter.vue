@@ -34,7 +34,7 @@
 <!-- 尾部 -->
   <div class="describing" v-show="changetype">{{describing[typenum]}}</div>
   <div class="control" >   
-      <i class="iconfont " :class="playtype1[typenum]" @touchstart="playtype"></i>
+      <i class="iconfont " :class="playtype1[typenum]" @touchend="playtype"></i>
       <i class="iconfont icon-shangyiqu101" @touchend = "target('prev')"></i>
       <i class="iconfont " :class="isplayicon" @click="play"></i>
       <i class="iconfont icon-xiayiqu101" @touchend = "target"></i>
@@ -177,14 +177,14 @@ export default {
       this.$store.commit('changenowplayid',songinfo.album.mid) 
       this.$store.commit('changenowplaykey',nextsong)
       this.$store.commit('changenowplayimg',this.$store.state.resl[imgindex])
-      console.log(imgindex,this.$store.state.resl[imgindex]) 
+      console.log(nextsong,this.$store.state.resl.length ,this.$store.state.resl[imgindex]) 
       audio.play()    
     },
     playtype(){
       this.changetype = true;
-      setInterval(function(){
+      setTimeout(()=>{
         this.changetype = false;
-      },500)
+      },2000)
       this.$store.commit("changetype")
     },
     /* 返回 */
@@ -204,8 +204,6 @@ export default {
     timeed(n) {
       this.$store.commit("changetime", n);
     },
-    sumtime(){
-    }
   },
   computed: {    
     songlist(){            /* 歌曲列表 */

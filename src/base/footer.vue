@@ -28,22 +28,15 @@ export default {
   },
   components: {},
   computed:{
-    nowplay(){
+    nowplay(){          /* 正在播放的歌曲信息 */
       return this.$store.state.nowplay
     },
     isPlaying(){
       return this.$store.state.isplay
     },
-    isplayicon(){
+    isplayicon(){       /* 是否播放 */
       return this.$store.state.isplay?"icon-zanting":"icon-bofang"
-      /* if(this.$store.state.isplay){
-        return "icon-zanting"
-        
-      }else{
-        return "icon-bofang"
-      } */
     }
-
   },
   methods:{
     showmini(){
