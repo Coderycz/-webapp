@@ -155,6 +155,9 @@ export default {
       this.$store.commit('changenowplayimg',this.$store.state.resl[imgindex])
       audio.currentTime = 0;
       audio.play() 
+      if(!this.$store.state.isplay){
+         this.$store.commit("changeplay") 
+      }
       
       
     }

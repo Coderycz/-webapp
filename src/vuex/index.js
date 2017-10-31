@@ -16,7 +16,7 @@ export default new Vuex.Store({
         describing: ["随机播放","列表循环","单曲循环"],
         search: {
             result: {},                 /* 搜索结果 */
-            hist: []
+            hist: ['sdf','sdfsdf']
         }, 
         initlist:{}, 
         songlistheader:{

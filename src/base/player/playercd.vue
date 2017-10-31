@@ -5,8 +5,8 @@
             </div>
         </div>
         
-        <div :style="{'backgroundImage': 'url(../static/images/cd-mine.png)'}" class="cdpic" :class="{'test1':isplay}">
-            <img :src="this.$store.state.nowplay.img"/>
+        <div ref="contai" :style="{'backgroundImage': 'url(../static/images/cd-mine.png)','transform': 'rotate(0deg)'}" class="cdpic" >
+            <img :class="{'test1':isplay}" :src="this.$store.state.nowplay.img"/>
         </div>
         <div class="like-container">
             <div class="like">
@@ -20,13 +20,36 @@
 </template>
 
 <script>
+
 export default {
     data(){
-        return {
-            islike: true
+        return {         
+            islike: true,
+            playtime: 0,
+            puasetime: 0
         }
     },
-    warch:{
+    watch:{
+      isplay(n,o){/* 通过播放时间监控旋转度数 */
+        var buttontime = new Date()
+        console.log(buttontime.getTime(),buttontime.valueOf())
+        if(n == true){
+          this.playtime = buttontime.getTime()
+          console.log()
+        }else if(n == false){
+          this.puasetime = buttontime.getTime()
+        }
+        var degtime = this.puasetime-this.playtime
+        if(degtime<0){
+          return
+        }
+        console.log(this.puasetime-this.playtime)
+        var audio = document.querySelector('audio')  
+        var deg = 360*(degtime)/ 16000
+        var temp = this.$refs.contai.style.transform.replace(/^rotate\(/,'')
+        var olddeg = parseFloat(temp)
+        this.$refs.contai.style.transform =  `rotate(${deg+olddeg}deg)`        
+      }
       
     },
     methods:{
@@ -84,11 +107,11 @@ $sc: 25;
 
 /* cd盘用vh实现百分比宽高 */
 @-webkit-keyframes skyset {
-    0% { transform: rotate(0deg);}
-    100% {transform: rotate(360deg);}
+    0% { transform: translate3d(-50%, 0, 0) rotate(0deg);}
+    100% {transform: translate3d(-50%, 0, 0) rotate(360deg);}
 }
 .test1 {
-  animation: skyset 16s linear infinite .1s; 
+  animation: skyset 16s linear infinite ; 
 } 
 
 .cdpic {
@@ -105,6 +128,7 @@ $sc: 25;
     width: 28vh;
     height: 28vh;
     top: 8vh;
+
     transition: all 0.3s;
     left: 50%;
     border-radius: 50%;

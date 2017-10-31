@@ -82,15 +82,17 @@ export default {
       this.$store.commit("changemini")
     } ,
     index(k,v){    
-        var imgindex =  Math.round(Math.random()*this.$store.state.resl.length)
-
+      var imgindex =  Math.round(Math.random()*this.$store.state.resl.length)
       this.$store.commit('changenowplaysongname',v.album.name) 
       this.$store.commit('changenowplaysinger',v.author[0].title) 
       this.$store.commit('changenowplayid',v.album.mid) 
-      this.$store.commit('changenowplaykey',k) 
+      this.$store.commit('changenowplaykey',k)
       this.$store.commit('changenowplayimg',this.$store.state.resl[imgindex])
       audio.currentTime = 0;
       audio.play() 
+      if(!this.$store.state.isplay){
+         this.$store.commit("changeplay") 
+      }
     }
   }
 };
@@ -112,7 +114,6 @@ $sc: 25;
   opacity: 1;
   z-index: 9998;
 }
-
 /* 下面mini歌单 */
 .close {
   bottom: -320/$sc+rem !important;

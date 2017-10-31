@@ -152,10 +152,7 @@ export default {
       this.$store.commit("changeplay");
     },
     
-    target(p){  /* 切换歌曲上一曲下一曲 */
-      console.log(p)
-      audio.currentTime = 0;
-      
+    target(p){  /* 切换歌曲上一曲下一曲 */     
       var type = this.typenum
       var num = 0       /* 单曲 */
       if(type==1){      /* 列表循环 */
@@ -178,7 +175,12 @@ export default {
       this.$store.commit('changenowplaykey',nextsong)
       this.$store.commit('changenowplayimg',this.$store.state.resl[imgindex])
       console.log(nextsong,this.$store.state.resl.length ,this.$store.state.resl[imgindex]) 
-      audio.play()    
+      audio.currentTime = 0;
+      audio.play()
+      if(!this.$store.state.isplay){
+         this.$store.commit("changeplay") 
+      }
+        
     },
     playtype(){
       this.changetype = true;

@@ -72,6 +72,7 @@ export default {
           this.hidd = false;
       }
   },
+  
   computed:{
     hist(){
       return this.$store.state.search.hist ? this.$store.state.search.hist: ["promise", "化身孤岛的鲸", "李香兰" ]
@@ -79,6 +80,7 @@ export default {
   },
   created() {
     this.gethot();  
+    console.log(this.hist)
   },
   methods: {
     target(){
@@ -89,8 +91,10 @@ export default {
       if(index>=0){
         this.hist.splice(index,1)
       }
-      var temp = this.hist.unshift(this.search)
-      this.hist = this.hist.splice(0,5)
+      console.log(index)
+      var temp = this.hist.unshift(this.search) 
+      //console.log()
+      this.hist = this.hist.splice(5)
       this.$store.commit("changesearch",this.showsearch)
       this.$store.commit("changehist",this.hist)
     },
@@ -189,6 +193,7 @@ $sc:25;
   line-height: $size;
 }
 .container {
+  position: absolute;
   width: 100%;
   height: 100%;
   overflow-y: auto;
