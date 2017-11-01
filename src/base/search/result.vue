@@ -20,7 +20,7 @@
         </ul>
         </div>
     <!-- 结果 -->
-      <div class="bottom" @click="hidd = true">
+      <div class="bottom" @click="hidd = true" :class="{'hidminiplayer':this.$store.state.showminiplayer}">
       <ul class="res">
           <li v-for="(v,k) in result.songname">
               <div>
@@ -191,9 +191,11 @@ $sc:25;
   left: 0;
   right: 0;
   top: 50/$sc+rem;
-  bottom: 46/$sc+rem;
   z-index: 99;
   overflow-y: auto
+}
+.hidminiplayer{
+  bottom: 46/$sc+rem;
 }
 
 .header {

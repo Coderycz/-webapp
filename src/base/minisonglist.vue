@@ -14,7 +14,7 @@
                     <i class="iconfont icon-wenjianjia"></i>
                     <span>收藏</span>
                 </div>
-                <div>
+                <div @touchend="clear">
                     <i class="iconfont icon-icon-text-fn-delete"></i>
                     <span>清空</span>
                 </div>               
@@ -24,12 +24,12 @@
        
             <ul class="songlist">
                 <li v-for="(v,k) in minilist" @click="index(k,v)">
-                    <div>
-                        <i class="iconfont icon-shengyin red"  v-show="key == k"></i>
+                    <div :class="{'redtext':key == k && isplay}">
+                        <i class="iconfont icon-shengyin red"  v-show="key == k && isplay"></i>
                         <span class="songname">{{v.album.name}}</span> - 
                         <span class="singer">{{v.author[0].title}}</span>
                     </div>                    
-                    <i class="iconfont icon-chuyidong"></i>
+                    <i class="iconfont icon-chuyidong del" @click.stop="del(k)"></i>
                 </li>
             </ul>       
     </div> 
@@ -51,14 +51,20 @@ export default {
       console.log()
   },
   computed:{
+      isplay(){
+          return this.$store.state.isplay
+      },
       key(){
-          return this.$store.state.nowplay.key
+          return this.$store.state.nowplay.minikey
       },
       minilist(){
-          return this.$store.state.songlist
+          return this.$store.state.minisonglist
       },
       typenum(){
       return this.$store.state.typenum
+    },
+    songlist(){
+        return this.$store.state.minisonglist
     },
     playtype1(){
       return this.$store.state.type
@@ -72,6 +78,50 @@ export default {
     }
   },
   methods: {
+      /* 检测播放列表是否已空 */
+      testmini(){
+          if(this.$store.state.minisonglist.length == 0 ){
+                  this.$store.commit('changemini')              /* mini播放列表 */
+                  this.$store.commit('changeminiplayer',false)  /* mini播放器 */
+                  //console.log(this.$store.state.isplay)
+                  this.$store.commit('changeplay')              /* 停止播放器 */
+                  audio.currentTime = 0;
+                  audio.pause();
+                  //console.log(this.$store.state.isplay)
+                  //console.log(this.$store.state.minisonglist.length)
+                  this.$router.push('/songlist')                /* 跳转到歌单列表 */
+                  return 
+              }
+      },
+      clear(){
+          var list = this.$store.state.minisonglist
+          var arr1 = list.slice(0,0)
+          this.$store.commit('initminisonglist',[])
+          this.testmini()      
+      },
+      del(k){       
+          var list = this.$store.state.minisonglist
+          var arr1 = list.slice(0,k)
+          var arr2 = list.slice(k+1)  
+          this.$store.commit('initminisonglist',arr1.concat(arr2)) 
+          var oldkey = this.$store.state.nowplay.minikey
+          if(oldkey > k)  {
+              this.$store.commit('changenowplayminikey',oldkey-1)
+          }
+          if(oldkey == k){
+              this.testmini()
+              this.target()
+              /* 根据歌名找到索引 */
+              var songname = this.$store.state.nowplay.name
+                var arr = []
+                for(var i = 0; i<this.$store.state.minisonglist.length; i++){
+                    arr.push(this.$store.state.minisonglist[i].album.name)
+                }  
+         //console.log(songname, ) 
+                this.$store.commit('changenowplayminikey',arr.indexOf(songname))           
+          }
+          console.log(k,arr1)
+      },
       playtype(){
            this.$store.commit("changetype")
       },
@@ -80,16 +130,42 @@ export default {
     },
     close(){     
       this.$store.commit("changemini")
-    } ,
+    },
+    target(){  /* 切换歌曲上一曲下一曲 */     
+      var type = this.typenum
+      var num = 0       /* 单曲 */
+      if(type==1){      /* 列表循环 */
+          num = 0       /* 下一曲 */
+      }else if(type==0){    /* 随机播放 */
+        num = Math.round(Math.random()*this.songlist.length)
+      }
+      //var imgindex = Math.round(Math.random()*this.$store.state.resl.length)
+      var nextsong = this.key+num>this.songlist.length-1 ? this.key+num-this.songlist.length :
+                     this.key+num < 0 ? this.key+num+this.songlist.length : this.key+num
+     console.log( nextsong)
+     var songinfo = this.songlist[nextsong] 
+      var imgindex = nextsong%this.$store.state.resl.length     
+      this.$store.commit('changenowplaysongname',songinfo.album.name) 
+      this.$store.commit('changenowplaysinger',songinfo.author[0].title) 
+      this.$store.commit('changenowplayid',songinfo.album.mid) 
+      this.$store.commit('changenowplayimg',this.$store.state.resl[imgindex])
+      console.log(nextsong,this.$store.state.resl.length ,this.$store.state.resl[imgindex]) 
+      audio.currentTime = 0;
+      audio.play()
+      if(!this.$store.state.isplay){
+         this.$store.commit("changeplay") 
+      }      
+    },
     index(k,v){    
-      var imgindex =  Math.round(Math.random()*this.$store.state.resl.length)
+      var imgindex =  Math.round(Math.random()*(this.$store.state.resl.length-1))
       this.$store.commit('changenowplaysongname',v.album.name) 
       this.$store.commit('changenowplaysinger',v.author[0].title) 
       this.$store.commit('changenowplayid',v.album.mid) 
-      this.$store.commit('changenowplaykey',k)
+      this.$store.commit('changenowplayminikey',k)
       this.$store.commit('changenowplayimg',this.$store.state.resl[imgindex])
       audio.currentTime = 0;
       audio.play() 
+      console.log(imgindex,this.$store.state.nowplay.minikey)
       if(!this.$store.state.isplay){
          this.$store.commit("changeplay") 
       }
@@ -176,6 +252,9 @@ i{
             height: 42/$sc+rem;
         line-height: 42/$sc+rem;
         }
+        .redtext{
+            color: red!important;
+        }
         .red{
             font-size: 14/$sc+rem;
             color: red;
@@ -186,6 +265,13 @@ i{
         .singer{
             font-size: 12/$sc+rem;
             color: #999;
+        }
+        .del{
+            width: 42/$sc+rem;
+            height: 42/$sc+rem;
+            position: -15/$sc+rem;
+            line-height: 42/$sc+rem;
+            text-align: center;
         }
     }
 

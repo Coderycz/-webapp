@@ -1,5 +1,5 @@
 <template>
-<div class="reccontent">
+<div class="reccontent" :class="{'hidminiplayer':this.$store.state.showminiplayer}">
     <div class="nav">
         <div class="active">音乐</div>
         <div >视频</div>
@@ -64,15 +64,18 @@ export default {
 <style lang="scss" scoped>
 /* sjdlksjdfl */
 $sc:25;
+
 .reccontent {
   width: 100%;
   position: absolute;
   top: 2rem;
   left: 0;
+  bottom: 0;
   right: 0;
+  overflow-x: hidden;  
+}
+.hidminiplayer{
   bottom: 46/$sc+rem;
-  overflow-x: hidden; 
-  
 }
 .nav {
   margin: 0 20/$sc+rem;

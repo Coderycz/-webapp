@@ -4,12 +4,13 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state : {
         witch: 1,
+        showminiplayer: false,           /* 显示mini播放器 */
         showsidebar: true,              /* 显示左侧导航 */
         showminilist: true,             /* 显示底部迷你菜单 */
         isplay:false,                   /* 是否正在播放 */
         playtime: 0,                    /* 以播放时长 */
         duration: 0,                    /* 总时长 */
-        volume: 1,
+        volume: 1,                      /* 音量 */
         typenum: 0,                     /* 播放类型 */
         dissid: 0,                      /* 歌单id */   
         type : ["icon-suijibofang","icon-liebiaoxunhuan","icon-danquxunhuan"],
@@ -24,12 +25,14 @@ export default new Vuex.Store({
             title: '东京街头霓虹灯下罐装啤酒少女'
         },              /* 选择了哪一个歌单 */
         songlist:{},                    /* 正在播放的歌单 */
+        minisonglist:{},                /* 正在播放的mini歌单 */
         nowplay:{                       /* 正在播放歌曲信息 */
             name: '火星研究院',
             singer: '汪苏泷',
             img: 'http://p.qpic.cn/music_cover/6XFhg7ldObzBw37HAkL9Lqz6icmvuH4I2bbg1fTQHVUOQFEK0bT8bgA/600?n=1',
             id: 0,
-            key: 0
+            key: 0,
+            minikey: 0,
         },
         resl:[]                 /* 图片 */
 
@@ -39,6 +42,9 @@ export default new Vuex.Store({
     mutations:{
         witchone(state,b){
             state.witch = b
+        },
+        changeminiplayer(state,b){
+            state.showminiplayer = b
         },
         change(state){
             state.showsidebar= !state.showsidebar
@@ -71,12 +77,16 @@ export default new Vuex.Store({
         changehist(state,b){
             state.search.hist = b
         },
-        changesonglist(state,b){
+        changesonglist(state,b){        
             state.songlist = b
         },
 
         initsonglist(state,b){
             state.initlist = b
+        },
+
+        initminisonglist(state,b){
+            state.minisonglist = b
         },
         /* 正在播放音乐名 */
         changenowplaysongname(state,b){
@@ -90,6 +100,9 @@ export default new Vuex.Store({
         },
         changenowplaykey(state,b){
             state.nowplay.key = b
+        },
+        changenowplayminikey(state,b){
+            state.nowplay.minikey = b
         },
         changenowplayimg(state,b){
             state.nowplay.img = b

@@ -5,7 +5,7 @@
       <router-view/>
     </keep-alive>
     <minilist></minilist>
-    <my-footer></my-footer>    
+     <my-footer v-show="this.$store.state.showminiplayer"></my-footer>
   </div>
 </template>
 <script>
@@ -35,7 +35,6 @@ export default {
   created(){
     this.getpersonlist() /* 模拟默认数据 */
     this._getsonglist() /* 获取歌单 */
-    console.log(this.$store.state.songlist)
     this.init()
   },
   methods:{
@@ -53,9 +52,7 @@ export default {
             callback: "recom17361411500470214"//callback=recom17361411500470214
           }).then(res=>{
              this.resl = res.body.recomPlaylist.data.v_hot
-             console.log(this.resl)
-             this.$store.commit("initsonglist",this.resl)
-             
+             this.$store.commit("initsonglist",this.resl)    
              for(let i = 0;i<this.resl.length;i++){
                  /* 存入图片，歌曲切换用 */
                 this.$store.commit('changeimg',this.resl[i].cover)     
@@ -68,8 +65,8 @@ export default {
       callback:"recom14277918772343812"
     }).then(res=>{
       var arr = res.body.new_album.data.album_list
-      console.log(arr)
-      this.$store.commit('changesonglist',res.body.new_album.data.album_list)     
+      this.$store.commit('changesonglist',res.body.new_album.data.album_list) 
+      this.$store.commit("initminisonglist",arr)   
       /* res.body.new_album.data.album_list .album.title*/    
     })
     }

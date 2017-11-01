@@ -1,6 +1,6 @@
 <template>
   <transition name="container"  @scroll="scrollEvent">
-    <div class="container">
+    <div class="container" :class="{'hidminiplayer':this.$store.state.showminiplayer}">
       <!-- header -->
       <div class="cover" ref="songsheet" :style="{backgroundImage:'url('+cover+')'}"></div>
       <div class="header" ref="songheader">
@@ -49,7 +49,7 @@
       </div>
 
       <!-- 播放全部 -->
-      <div class="play"  @scroll="">
+      <div class="play"  >
         <div class="left">
           <i class=" iconfont icon-bofang"></i>
           <span class="main">全部播放</span>
@@ -66,8 +66,8 @@
       <ul>
         <li v-for="(v,k) in lists"  @click="index(k,v)">
           <div class="index">
-            <i class="iconfont icon-shengyin" v-show="(key==k)"></i>
-            <span v-show="!(key==k)">{{k+1}}</span>
+            <i class="iconfont icon-shengyin" v-show="(key==k) && isplay "></i>
+            <span v-show="!(key==k) || !isplay">{{k+1}}</span>
           </div>
           <div class="songlists">
             <div class="song">
@@ -82,8 +82,6 @@
         </li>
       </ul>
 
-      <!-- mini播放器 -->
-      <myfooter></myfooter>
       </div>
   </transition> 
 </template>
@@ -101,13 +99,23 @@ export default {
   },
   components:{
     myfooter
+
   },
   created(){
     //this.getpersonlist()
   },  
   computed:{
+    isplay(){
+      return this.$store.state.isplay
+    },
     key(){
-          return this.$store.state.nowplay.key
+         var songname = this.$store.state.nowplay.name
+          var arr = []
+          for(var i = 0; i<this.$store.state.songlist.length; i++){
+            arr.push(this.$store.state.songlist[i].album.name)
+          }  
+         //console.log(songname, )         
+         return arr.indexOf(songname)         
       },
     cover(){
       return this.$store.state.songlistheader.cover
@@ -135,10 +143,6 @@ export default {
 					this.$refs.songheader.style.filter = `alpha(opacity:${100})`
 				}
 			}, */
-    
-    
-
-
     goback() {
       return this.$router.go(-1);
     },
@@ -146,20 +150,20 @@ export default {
       if(this.key == k){      
         return this.$router.push('/player')          
       }
-      var imgindex =  Math.round(Math.random()*this.$store.state.resl.length)
+      var imgindex =  Math.round(Math.random()*(this.$store.state.resl.length-1))
       this.$store.commit('changenowplaysongname',v.album.name) 
       this.$store.commit('changenowplaysinger',v.author[0].title) 
       this.$store.commit('changenowplayid',v.album.mid) 
       this.$store.commit('changenowplaykey',k) 
-      console.log(imgindex,this.$store.state.resl[imgindex])
       this.$store.commit('changenowplayimg',this.$store.state.resl[imgindex])
       audio.currentTime = 0;
       audio.play() 
       if(!this.$store.state.isplay){
          this.$store.commit("changeplay") 
       }
-      
-      
+      /* 更新mini播放列表 */
+      this.$store.commit('initminisonglist',this.$store.state.songlist)
+      this.$store.commit('changeminiplayer',true)    
     }
   }
 };
@@ -198,6 +202,9 @@ $s : 25;
   overflow-y: auto;
   background: #efefef;
   font-size: 16/$s+rem;
+
+}
+.hidminiplayer{
   padding-bottom: 46/$s+rem;
 }
 .cover{
@@ -206,10 +213,8 @@ $s : 25;
   position: fixed;
   top: 0;
   z-index: 10;
-  background-size: 5800%;
+  background-size: 3000%;
   background-position: center center;
-
-  
 }
 .header {
   position: fixed;
@@ -239,8 +244,7 @@ $s : 25;
   color: #ddd;
   width: 100%;
     height: 245/$s+rem;
-    
-    background-size: 5800%;
+    background-size: 3000%;
     background-position: center center;
 
    // background: rgba(0,0,0,.3);

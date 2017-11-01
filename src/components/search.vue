@@ -22,7 +22,7 @@
         </div>
 
         <!-- 热门 -->
-        <div class="bottom" @touchend="hidd=true">
+        <div class="bottom" @touchend="hidd=true" :class="{'hidminiplayer':this.$store.state.showminiplayer}">
         <div class="hot">
             <div class="">热门搜索</div>
             <ul>            
@@ -61,7 +61,6 @@ export default {
         singername:[],   /* 歌手名 */
         special:[]        /* 专辑 */
     },
-     // hist: ["promise", "化身孤岛的鲸", "李香兰", "陈奕迅", "看穿"],/* 搜索历史 */
       list: []          /* 热门搜索 */
     };
   },
@@ -93,7 +92,6 @@ export default {
       }
       console.log(index)
       var temp = this.hist.unshift(this.search) 
-      //console.log()
       this.hist = this.hist.splice(5)
       this.$store.commit("changesearch",this.showsearch)
       this.$store.commit("changehist",this.hist)
@@ -138,8 +136,7 @@ export default {
             }                  
             this.showsearch.songname.push(songinfo[i].songname)
             this.showsearch.singername.push(songinfo[i].singer[0].name)
-            this.showsearch.special.push(songinfo[i].albumname)
-              
+            this.showsearch.special.push(songinfo[i].albumname)              
           }
           
         });
@@ -213,8 +210,10 @@ $sc:25;
   left: 0;
   right: 0;
   top: 50/$sc+rem;
-  bottom: 46/$sc+rem;
   z-index: 99;
+}
+.hidminiplayer{
+  bottom: 46/$sc+rem;
 }
 
 

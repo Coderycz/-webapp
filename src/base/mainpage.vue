@@ -1,6 +1,6 @@
 <template>   
     <div class="my-body">
-        <div class="container">
+        <div class="container" :class="{'hidminiplayer':this.$store.state.showminiplayer}">
        <div class="up">
            <!-- 主页上面四格 -->
            <div class="up-item" >     
@@ -84,11 +84,13 @@ export default {
 <style lang="scss"  scoped>
 $sc: 25;
 
+.hidminiplayer{
+    margin-bottom: 46/$sc+rem;
+}
 .container{
     width: 100%;
     overflow-y: auto;
     margin-top: 2rem;
-    margin-bottom: 46/$sc+rem;
 }
 .up-item {
   //color: 
