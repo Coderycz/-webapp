@@ -48,14 +48,21 @@ export default {
     };
   },
   created(){
-      console.log()
+       
   },
   computed:{
       isplay(){
           return this.$store.state.isplay
       },
       key(){
-          return this.$store.state.nowplay.minikey
+          var songname = this.$store.state.nowplay.name
+          var arr = []
+          for(var i = 0; i<this.$store.state.minisonglist.length; i++){
+            arr.push(this.$store.state.minisonglist[i].album.name)
+          }  
+         console.log(songname,)         
+         return arr.indexOf(songname)
+         //return this.$store.state.nowplay.minikey
       },
       minilist(){
           return this.$store.state.minisonglist
@@ -116,11 +123,11 @@ export default {
                 var arr = []
                 for(var i = 0; i<this.$store.state.minisonglist.length; i++){
                     arr.push(this.$store.state.minisonglist[i].album.name)
-                }  
+                } 
          //console.log(songname, ) 
                 this.$store.commit('changenowplayminikey',arr.indexOf(songname))           
           }
-          console.log(k,arr1)
+          console.log(this.$store.state.songlist)
       },
       playtype(){
            this.$store.commit("changetype")
@@ -149,6 +156,7 @@ export default {
       this.$store.commit('changenowplaysinger',songinfo.author[0].title) 
       this.$store.commit('changenowplayid',songinfo.album.mid) 
       this.$store.commit('changenowplayimg',this.$store.state.resl[imgindex])
+      this.$store.commit('changenowplayminikey',this.key) 
       console.log(nextsong,this.$store.state.resl.length ,this.$store.state.resl[imgindex]) 
       audio.currentTime = 0;
       audio.play()

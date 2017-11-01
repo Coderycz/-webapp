@@ -138,7 +138,7 @@ export default {
       if(this.$refs.valued && this.$refs.cricle)  {
         this.$refs.valued.style.width = this.percent *this.$refs.pragress.offsetWidth+"px"
         this.$refs.cricle.style.left = this.percent *(this.$refs.pragress.offsetWidth-this.$refs.cricle.offsetWidth)+"px"
-        console.log(this.percent,this.$refs.pragress.offsetWidth) 
+        //console.log(this.percent,this.$refs.pragress.offsetWidth) 
       }            
     },   
     play() {
@@ -150,9 +150,9 @@ export default {
         clearInterval(timer);
       }
       this.$store.commit("changeplay");
-    },
-    
-    target(p){  /* 切换歌曲上一曲下一曲 */     
+    },  
+    target(p){  /* 切换歌曲上一曲下一曲 */ 
+    console.log(this.minisonglist)    
       var type = this.typenum
       var num = 0       /* 单曲 */
       if(type==1){      /* 列表循环 */
@@ -162,19 +162,20 @@ export default {
           num = 1       /* 下一曲 */
         }   
       }else if(type==0){    /* 随机播放 */
-        num = Math.round(Math.random()*this.songlist.length)
+        num = Math.round(Math.random()*this.minisonglist.length)
       }
       //var imgindex = Math.round(Math.random()*this.$store.state.resl.length)
-      var nextsong = this.index+num>this.songlist.length-1 ? this.index+num-this.songlist.length :
-                     this.index+num < 0 ? this.index+num+this.songlist.length : this.index+num
-      var songinfo = this.songlist[nextsong] 
+      var nextsong = this.index+num>this.minisonglist.length-1 ? this.index+num-this.minisonglist.length :
+                     this.index+num < 0 ? this.index+num+this.minisonglist.length : this.index+num
+      var songinfo = this.minisonglist[nextsong] 
+      
       var imgindex = nextsong%this.$store.state.resl.length     
       this.$store.commit('changenowplaysongname',songinfo.album.name) 
       this.$store.commit('changenowplaysinger',songinfo.author[0].title) 
       this.$store.commit('changenowplayid',songinfo.album.mid) 
       this.$store.commit('changenowplaykey',nextsong)
       this.$store.commit('changenowplayimg',this.$store.state.resl[imgindex])
-      console.log(nextsong,this.$store.state.resl.length ,this.$store.state.resl[imgindex]) 
+      //console.log(nextsong,this.$store.state.resl.length ,this.$store.state.resl[imgindex]) 
       audio.currentTime = 0;
       audio.play()
       if(!this.$store.state.isplay){
@@ -244,6 +245,9 @@ export default {
     },
     isPlaying() {
       return this.$store.state.isplay;
+    },
+    minisonglist(){
+      return this.$store.state.minisonglist
     }
   },
   components: {
