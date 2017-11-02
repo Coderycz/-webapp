@@ -47,8 +47,7 @@ export default {
      
     };
   },
-  created(){
-       
+  created(){    
   },
   computed:{
       isplay(){
@@ -60,7 +59,8 @@ export default {
           for(var i = 0; i<this.$store.state.minisonglist.length; i++){
             arr.push(this.$store.state.minisonglist[i].album.name)
           }  
-         console.log(songname,)         
+          this.$store.commit('changenowplayminikey',arr.indexOf(songname))
+         //console.log(songname,)         
          return arr.indexOf(songname)
          //return this.$store.state.nowplay.minikey
       },
@@ -127,29 +127,36 @@ export default {
          //console.log(songname, ) 
                 this.$store.commit('changenowplayminikey',arr.indexOf(songname))           
           }
-          console.log(this.$store.state.songlist)
+          //console.log(this.$store.state.songlist)
       },
       playtype(){
            this.$store.commit("changetype")
       },
     add() {
-      console.log("sdf");
+      
     },
     close(){     
       this.$store.commit("changemini")
     },
-    target(){  /* 切换歌曲上一曲下一曲 */     
+    target(){  /* 切换歌曲 */     
       var type = this.typenum
-      var num = 0       /* 单曲 */
-      if(type==1){      /* 列表循环 */
-          num = 0       /* 下一曲 */
-      }else if(type==0){    /* 随机播放 */
+      var num = 0                           
+      if(type==1){                          /* 列表循环 */
+          num = 1                           /* 下一曲 */
+      }else if(type==0){                    /* 随机播放 */
         num = Math.round(Math.random()*this.songlist.length)
+      }else if(type == 2){                  /* 单曲循环 */
+        audio.currentTime = 0;
+        audio.play()
+        if(!this.$store.state.isplay){
+          this.$store.commit("changeplay") 
+        }
+        return 
       }
       //var imgindex = Math.round(Math.random()*this.$store.state.resl.length)
       var nextsong = this.key+num>this.songlist.length-1 ? this.key+num-this.songlist.length :
                      this.key+num < 0 ? this.key+num+this.songlist.length : this.key+num
-     console.log( nextsong)
+    
      var songinfo = this.songlist[nextsong] 
       var imgindex = nextsong%this.$store.state.resl.length     
       this.$store.commit('changenowplaysongname',songinfo.album.name) 
@@ -157,7 +164,7 @@ export default {
       this.$store.commit('changenowplayid',songinfo.album.mid) 
       this.$store.commit('changenowplayimg',this.$store.state.resl[imgindex])
       this.$store.commit('changenowplayminikey',this.key) 
-      console.log(nextsong,this.$store.state.resl.length ,this.$store.state.resl[imgindex]) 
+      //console.log(nextsong,this.$store.state.resl.length ,this.$store.state.resl[imgindex]) 
       audio.currentTime = 0;
       audio.play()
       if(!this.$store.state.isplay){
@@ -213,7 +220,6 @@ $sc: 25;
   height: 320/$sc+rem;
   background: #fff;
   color: #ddd;
-  padding-bottom: 40/$sc+rem; 
 }
 
 .flex{
@@ -229,6 +235,7 @@ i{
     width: 100%;
     color: #2c3e50;
     padding: 0 15/$sc+rem;
+    background: #fff;
     font-size: 14/$sc+rem;
     border-bottom: 1/$sc+rem solid rgba(7,17,27,.1);
     .palytype{
@@ -246,8 +253,7 @@ i{
 }
 
 .songlist{
-    //@extend .flex;
-    padding: 0 15/$sc+rem;
+    padding: 0 15/$sc+rem; 
     color: #2c3e50;
     li{
         height: 42/$sc+rem;
@@ -258,7 +264,7 @@ i{
         border-bottom: 1/$sc+rem solid rgba(7,17,27,.1);
         div{
             height: 42/$sc+rem;
-        line-height: 42/$sc+rem;
+            line-height: 42/$sc+rem;
         }
         .redtext{
             color: red!important;

@@ -151,8 +151,7 @@ export default {
       }
       this.$store.commit("changeplay");
     },  
-    target(p){  /* 切换歌曲上一曲下一曲 */ 
-    console.log(this.minisonglist)    
+    target(p){  /* 切换歌曲上一曲下一曲 */     
       var type = this.typenum
       var num = 0       /* 单曲 */
       if(type==1){      /* 列表循环 */
@@ -163,6 +162,13 @@ export default {
         }   
       }else if(type==0){    /* 随机播放 */
         num = Math.round(Math.random()*this.minisonglist.length)
+      }else if(type == 2){
+        audio.currentTime = 0;
+        audio.play()
+        if(!this.$store.state.isplay){
+          this.$store.commit("changeplay") 
+        }
+        return 
       }
       //var imgindex = Math.round(Math.random()*this.$store.state.resl.length)
       var nextsong = this.index+num>this.minisonglist.length-1 ? this.index+num-this.minisonglist.length :
@@ -175,6 +181,7 @@ export default {
       this.$store.commit('changenowplayid',songinfo.album.mid) 
       this.$store.commit('changenowplaykey',nextsong)
       this.$store.commit('changenowplayimg',this.$store.state.resl[imgindex])
+      console.log(imgindex,nextsong)
       //console.log(nextsong,this.$store.state.resl.length ,this.$store.state.resl[imgindex]) 
       audio.currentTime = 0;
       audio.play()
@@ -213,7 +220,7 @@ export default {
        return this.$store.state.songlist
     },   
     index(){                /* 正在播放歌曲的索引值 */
-      return this.$store.state.nowplay.key
+      return this.$store.state.nowplay.minikey
     },
     typenum(){
       return this.$store.state.typenum

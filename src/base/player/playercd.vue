@@ -35,7 +35,6 @@ export default {
         console.log(buttontime.getTime(),buttontime.valueOf())
         if(n == true){
           this.playtime = buttontime.getTime()
-          console.log()
         }else if(n == false){
           this.puasetime = buttontime.getTime()
         }
