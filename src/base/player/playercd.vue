@@ -29,27 +29,33 @@ export default {
             puasetime: 0
         }
     },
+    
     watch:{
-      isplay(n,o){/* 通过播放时间监控旋转度数 */
+      isplay(n,o){/* 通过播放时间监控旋转度数 */    
         var buttontime = new Date()
-        console.log(buttontime.getTime(),buttontime.valueOf())
+        console.log("play",this.$store.state.playedtime)
+       // console.log(buttontime.getTime(),buttontime.valueOf())
         if(n == true){
-          this.playtime = buttontime.getTime()
+          this.$store.commit('changeplaytime',buttontime.getTime())
+          console.log("play",this.$store.state.playedtime)
+          //this.playtime = buttontime.getTime()
         }else if(n == false){
-          this.puasetime = buttontime.getTime()
+          this.$store.commit('changepuasetime',buttontime.getTime())
+          console.log("paues",this.$store.state.puasetime)
+          //this.puasetime = buttontime.getTime()
         }
-        var degtime = this.puasetime-this.playtime
-        if(degtime<0){
+        var degtime = this.$store.state.puasetime-this.$store.state.playedtime
+        console.log(degtime)
+       if(degtime<0){
           return
         }
-        console.log(this.puasetime-this.playtime)
+        //console.log(this.puasetime-this.playtime)
         var audio = document.querySelector('audio')  
         var deg = 360*(degtime)/ 16000
         var temp = this.$refs.contai.style.transform.replace(/^rotate\(/,'')
         var olddeg = parseFloat(temp)
         this.$refs.contai.style.transform =  `rotate(${deg+olddeg}deg)`        
-      }
-      
+      }    
     },
     methods:{
         changelike(){     

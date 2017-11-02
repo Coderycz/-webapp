@@ -8,6 +8,8 @@ export default new Vuex.Store({
         showsidebar: true,              /* 显示左侧导航 */
         showminilist: true,             /* 显示底部迷你菜单 */
         isplay:false,                   /* 是否正在播放 */
+        playedtime: 0,                    /* 播放时间 */
+        puasetime: 0,                   /* 暂停时间 */
         playtime: 0,                    /* 以播放时长 */
         duration: 0,                    /* 总时长 */
         volume: 1,                      /* 音量 */
@@ -54,6 +56,12 @@ export default new Vuex.Store({
         },
         changeplay(state){
             state.isplay= !state.isplay
+        },
+        changeplaytime(state,b){
+            state.playedtime= b
+        },
+        changepuasetime(state,b){
+            state.puasetime= b
         },
         changetime(state,b){
             state.playtime = b

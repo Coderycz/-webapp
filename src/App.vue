@@ -23,7 +23,8 @@ export default {
   name: 'app',
   data(){
     return {
-      resl:{}
+      resl:{},
+      isplay:this.$store.state.isplay
     }
   },
   components:{
@@ -36,6 +37,23 @@ export default {
     this.getpersonlist() /* 模拟默认数据 */
     this._getsonglist() /* 获取歌单 */
     this.init()
+    console.log(this.isplay)
+  },
+  
+  watch:{
+    isplay(){
+      var buttontime = new Date()
+        console.log(buttontime.getTime(),buttontime.valueOf())
+        if(n == true){
+          this.$store.commit('changeplaytime',buttontime.getTime())
+          console.log("play",this.$store.state.playedtime)
+          //this.playtime = buttontime.getTime()
+        }else if(n == false){
+          this.$store.commit('changepuasetime',buttontime.getTime())
+          console.log("paues",this.$store.state.puasetime)
+          //this.puasetime = buttontime.getTime()
+        }
+    }
   },
   methods:{
     init(){

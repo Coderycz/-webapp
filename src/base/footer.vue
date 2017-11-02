@@ -1,7 +1,7 @@
 <template>   
     <div class="my-footer">
         <div class="container">
-          <router-link tag="div" to="/player" class="y-footer">
+          <router-link tag="div" to="/player" class="y-footer" @click.native="playtime">
             <div class="leftinfo">
                 <img :src="this.$store.state.nowplay.img" alt="">
                 <div class="songname">
@@ -51,6 +51,10 @@ export default {
         }
         this.$store.commit("changeplay")
     },
+    playtime(){
+      var buttontime = new Date()
+      this.$store.commit('changeplaytime',buttontime.getTime())
+    }
   }
 };
 </script>

@@ -101,9 +101,10 @@ export default {
     myfooter
 
   },
+
   created(){
     //this.getpersonlist()
-  },  
+  }, 
   computed:{
     isplay(){
       return this.$store.state.isplay
@@ -147,7 +148,9 @@ export default {
       return this.$router.go(-1);
     },
     index(k,v){           /* 将点击的歌曲传入仓库 */
-      if(this.key == k){      
+      if(this.key == k){    
+      var buttontime = new Date()
+      this.$store.commit('changeplaytime',buttontime.getTime())   
         return this.$router.push('/player')          
       }
       var imgindex =  Math.round(Math.random()*(this.$store.state.resl.length-1))
