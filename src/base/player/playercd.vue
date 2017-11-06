@@ -1,11 +1,11 @@
 <template>
     <div class="cd" >
         <div class="line">
-            <div :style="{'backgroundImage': 'url(../static/images/swith.png)'}" class="pointer " :class="{'pause':!isplay}">
+            <div :style="{'backgroundImage': 'url(./static/images/swith.png)'}" class="pointer " :class="{'pause':!isplay}">
             </div>
         </div>
         
-        <div ref="contai" :style="{'backgroundImage': 'url(../static/images/cd-mine.png)','transform': 'rotate(0deg)'}" class="cdpic" >
+        <div ref="contai" :style="{'backgroundImage': 'url(./static/images/cd-mine.png)','transform': 'rotate(0deg)'}" class="cdpic" >
             <img :class="{'test1':isplay}" :src="this.$store.state.nowplay.img"/>
         </div>
         <div class="like-container">

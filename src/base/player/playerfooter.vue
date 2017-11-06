@@ -112,7 +112,7 @@ export default {
         //移动时改变已播放 进度条 和 滑点 位置
         this.$refs.valued.style.width = length *pragresswidth+"px"
         this.$refs.cricle.style.left = length *(pragresswidth-this.$refs.cricle.offsetWidth)+"px"    
-       console.log(audio.currentTime)    
+      // console.log(audio.currentTime)    
     },
     touchend(){
       if(istouch){    
@@ -200,13 +200,14 @@ export default {
     /* 返回 */
     showlyric() {
       this.lyric = !this.lyric;
-      console.log(this.lyric);
+     // console.log(this.lyric);
     },
     goback() {
+      this.$store.commit('changeminiplayer',true)
       return this.$router.go(-1);
     },
     showmini(){
-      console.log("sdf")
+      //console.log("sdf")
       this.$store.commit("changemini");
     },
   },
@@ -242,7 +243,7 @@ export default {
     },
     sumtime(){
       var gett = this.$store.state.duration>0 ? this.$store.state.duration : 0 ;
-      console.log(gett)
+     // console.log(gett)
       var min = (parseInt(gett / 60) + "").padStart(2, "0");
       var sec = (parseInt(gett % 60) + "").padStart(2, "0");
       return `${min}:${sec}`;
@@ -276,6 +277,7 @@ $sc: 25;
   padding: 8/$sc+rem 0;
   position: fixed;
   top: 0;
+
   display: flex;
   color: #fff;
   div {

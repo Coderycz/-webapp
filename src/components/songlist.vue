@@ -130,7 +130,7 @@ export default {
   },
   methods:{
     scrollEvent(){
-      console.log('sdfsd')
+     // console.log('sdfsd')
     },
     /* scrollEvent () {
       console.log(this.$refs.songsheet.scrollTop,this.$refs.top.offsetHeight)
@@ -150,7 +150,8 @@ export default {
     index(k,v){           /* 将点击的歌曲传入仓库 */
       if(this.key == k){    
       var buttontime = new Date()
-      this.$store.commit('changeplaytime',buttontime.getTime())   
+      this.$store.commit('changeplaytime',buttontime.getTime())
+      this.$store.commit('changeminiplayer',false)   
         return this.$router.push('/player')          
       }
       var imgindex =  Math.round(Math.random()*(this.$store.state.resl.length-1))

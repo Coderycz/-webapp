@@ -37,20 +37,20 @@ export default {
     this.getpersonlist() /* 模拟默认数据 */
     this._getsonglist() /* 获取歌单 */
     this.init()
-    console.log(this.isplay)
+    //console.log(this.isplay)
   },
   
   watch:{
     isplay(){
       var buttontime = new Date()
-        console.log(buttontime.getTime(),buttontime.valueOf())
+       // console.log(buttontime.getTime(),buttontime.valueOf())
         if(n == true){
           this.$store.commit('changeplaytime',buttontime.getTime())
-          console.log("play",this.$store.state.playedtime)
+         // console.log("play",this.$store.state.playedtime)
           //this.playtime = buttontime.getTime()
         }else if(n == false){
           this.$store.commit('changepuasetime',buttontime.getTime())
-          console.log("paues",this.$store.state.puasetime)
+         // console.log("paues",this.$store.state.puasetime)
           //this.puasetime = buttontime.getTime()
         }
     }
@@ -62,7 +62,6 @@ export default {
       this.$store.commit('changenowplaysinger',data[0].author[0].title) 
       this.$store.commit('changenowplayid',data[0].album.mid) 
       this.$store.commit('changenowplaykey',0) */
-      console.log(data)
     }, 
      _getsonglist(){
      var url = "https://u.y.qq.com/cgi-bin/musicu.fcg?data=%7B%22comm%22%3A%7B%22ct%22%3A24%7D%2C%22category%22%3A%7B%22method%22%3A%22get_hot_category%22%2C%22param%22%3A%7B%22qq%22%3A%22%22%7D%2C%22module%22%3A%22music.web_category_svr%22%7D%2C%22recomPlaylist%22%3A%7B%22method%22%3A%22get_hot_recommend%22%2C%22param%22%3A%7B%22async%22%3A1%2C%22cmd%22%3A2%7D%2C%22module%22%3A%22playlist.HotRecommendServer%22%7D%2C%22playlist%22%3A%7B%22method%22%3A%22get_playlist_by_category%22%2C%22param%22%3A%7B%22id%22%3A8%2C%22curPage%22%3A1%2C%22size%22%3A40%2C%22order%22%3A5%2C%22titleid%22%3A8%7D%2C%22module%22%3A%22playlist.PlayListPlazaServer%22%7D%2C%22new_song%22%3A%7B%22module%22%3A%22QQMusic.MusichallServer%22%2C%22method%22%3A%22GetNewSong%22%2C%22param%22%3A%7B%22type%22%3A0%7D%7D%2C%22new_album%22%3A%7B%22module%22%3A%22QQMusic.MusichallServer%22%2C%22method%22%3A%22GetNewAlbum%22%2C%22param%22%3A%7B%22type%22%3A0%2C%22category%22%3A%22-1%22%2C%22genre%22%3A0%2C%22year%22%3A1%2C%22company%22%3A-1%2C%22sort%22%3A1%2C%22start%22%3A0%2C%22end%22%3A39%7D%7D%2C%22toplist%22%3A%7B%22module%22%3A%22music.web_toplist_svr%22%2C%22method%22%3A%22get_toplist_index%22%2C%22param%22%3A%7B%7D%7D%2C%22focus%22%3A%7B%22module%22%3A%22QQMusic.MusichallServer%22%2C%22method%22%3A%22GetFocus%22%2C%22param%22%3A%7B%7D%7D%7D"

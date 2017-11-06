@@ -50,7 +50,7 @@ $sc: 25;
 .tran{
   position: absolute;
   width: 100%;
-  height: 100%
+  height: 100%;
 }      
 .container {  
   position: fixed;
@@ -61,7 +61,7 @@ $sc: 25;
   .bg {
     height: 100%;
     position: fixed;
-    z-index: -1;
+    z-index: -2;
   }
   img {
     display: inline-block;

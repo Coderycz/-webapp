@@ -180,7 +180,7 @@ export default {
       this.$store.commit('changenowplayimg',this.$store.state.resl[imgindex])
       audio.currentTime = 0;
       audio.play() 
-      console.log(imgindex,this.$store.state.nowplay.minikey)
+      //console.log(imgindex,this.$store.state.nowplay.minikey)
       if(!this.$store.state.isplay){
          this.$store.commit("changeplay") 
       }

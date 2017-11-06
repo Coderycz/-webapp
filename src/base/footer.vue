@@ -1,7 +1,7 @@
 <template>   
-    <div class="my-footer">
-        <div class="container">
-          <router-link tag="div" to="/player" class="y-footer" @click.native="playtime">
+
+        <div class="container" v-show="showminiplayer">
+          <div class="y-footer" @click="playtime">
             <div class="leftinfo">
                 <img :src="this.$store.state.nowplay.img" alt="">
                 <div class="songname">
@@ -13,8 +13,7 @@
                 <span @click.stop="playmu"><i class="iconfont" :class="isplayicon"></i></span>                
                 <span @click.stop="showmini"><i class="iconfont">&#xe604;</i></span>            
             </div>           
-        </router-link>
-    </div>
+        </div>
     </div>
 </template>
 
@@ -24,6 +23,7 @@ import {play} from "api/audio.js"
 export default {
   data(){
     return {
+      showminiplayer:true
     }
   },
   components: {},
@@ -53,7 +53,10 @@ export default {
     },
     playtime(){
       var buttontime = new Date()
+
+      this.$store.commit('changeminiplayer',false)
       this.$store.commit('changeplaytime',buttontime.getTime())
+      this.$router.push("/player")
     }
   }
 };
@@ -68,6 +71,7 @@ $sc: 25;
   width: 100%;
   position: fixed;
   bottom: 0;
+  z-index: 1000
 }
 .y-footer {
   padding: 5/$sc+rem;
